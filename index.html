@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Japón 2026 — Delfina, Santi, Pepo, Cele & Sofi</title>
+<style>
+  :root {
+    --red: #c0392b;
+    --ink: #1a1a2e;
+    --light: #f5f0e8;
+    --card: #ffffff;
+    --muted: #888;
+    --border: #e0d8cc;
+    --osaka:    #e67e22;
+    --kyoto:    #8e44ad;
+    --koyasan:  #d35400;
+    --alps:     #27ae60;
+    --tokyo:    #2980b9;
+    --fuji:     #c0392b;
+    --hakone:   #2c3e50;
+    --naoshima: #16a085;
+    --nikko:    #6d4c41;
+    --travel:   #999;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: var(--light); color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: white;
+    text-align: center;
+    padding: 48px 24px 40px;
+  }
+  .hero h1 { font-size: 2.4rem; letter-spacing: 0.06em; color: #f5f0e8; }
+  .hero .dates { font-size: 1rem; color: #aaa; margin-top: 8px; letter-spacing: 0.1em; }
+  .hero .group {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-top: 18px;
+  }
+  .member {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 0.85rem;
+    color: #ddd;
+  }
+  .flights {
+    display: flex; justify-content: center; gap: 30px;
+    margin-top: 24px; flex-wrap: wrap;
+  }
+  .flight-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    color: #ccc;
+    text-align: center;
+  }
+  .flight-pill strong { color: white; display: block; font-size: 0.9rem; margin-bottom: 2px; }
+
+  /* ── SECTIONS ── */
+  section { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  section + section { padding-top: 0; }
+  h2 {
+    font-size: 0.75rem; font-weight: bold; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 8px; border-bottom: 2px solid var(--red);
+    margin-bottom: 24px;
+  }
+
+  /* ── MAP ── */
+  .map-wrap { display: flex; justify-content: center; }
+  .map-wrap svg { max-width: 100%; }
+
+  /* ── SUMMARY GRID ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .sum-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 5px solid #ccc;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sum-num { font-size: 2rem; font-weight: bold; line-height: 1; }
+  .sum-label { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+  .sum-city { font-size: 0.9rem; font-weight: bold; color: var(--ink); }
+
+  /* ── DETAIL LIST ── */
+  .detail-list { display: flex; flex-direction: column; gap: 4px; }
+  .detail-row {
+    display: grid;
+    grid-template-columns: 42px 26px 170px 1fr;
+    align-items: center;
+    gap: 0 10px;
+    padding: 8px 12px;
+    background: var(--card);
+    border-radius: 8px;
+    border-left: 4px solid #ddd;
+  }
+  .detail-row.osaka    { border-left-color: var(--osaka); }
+  .detail-row.kyoto    { border-left-color: var(--kyoto); }
+  .detail-row.koyasan  { border-left-color: var(--koyasan); }
+  .detail-row.alps     { border-left-color: var(--alps); }
+  .detail-row.tokyo    { border-left-color: var(--tokyo); }
+  .detail-row.fuji     { border-left-color: var(--fuji); }
+  .detail-row.hakone   { border-left-color: var(--hakone); }
+  .detail-row.nikko    { border-left-color: var(--nikko); }
+  .detail-row.travel   { border-left-color: var(--travel); background: #f9f9f9; }
+  .d-num { font-size: 1.2rem; font-weight: bold; text-align: right; line-height: 1; }
+  .d-day { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
+  .d-city { font-size: 0.88rem; font-weight: bold; }
+  .d-night { font-size: 0.7rem; color: var(--muted); }
+  .d-note { font-size: 0.75rem; color: #555; line-height: 1.4; }
+  .pill {
+    display: inline-block; border-radius: 10px; padding: 1px 6px;
+    font-size: 0.63rem; font-weight: bold; margin-left: 4px; vertical-align: middle;
+  }
+  .p-move   { background: #e3f2fd; color: #0d47a1; }
+  .p-tip    { background: #e8f5e9; color: #1b5e20; }
+  .p-spec   { background: #fce4ec; color: #880e4f; }
+  .p-exc    { background: #fff8e1; color: #7c5c00; }
+  .p-res    { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .month-sep {
+    font-size: 0.7rem; font-weight: bold; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--red);
+    padding: 12px 0 6px; margin-top: 8px;
+  }
+
+  /* ── CALENDAR GRID ── */
+  .cal-wrap { overflow-x: auto; }
+  .cal { border-collapse: collapse; width: 100%; min-width: 560px; }
+  .cal th {
+    background: var(--ink); color: white;
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 4px; text-align: center; font-weight: normal;
+  }
+  .cal td {
+    width: 14.28%; min-width: 72px; height: 64px;
+    vertical-align: top; border: 1px solid var(--border);
+    padding: 4px 5px; font-size: 0.7rem; background: var(--card);
+  }
+  .cal td.empty { background: #f0ebe0; }
+  .cal td.out-trip { background: #f9f6f0; color: #ccc; }
+  .cal-num { font-size: 0.85rem; font-weight: bold; color: var(--ink); line-height: 1; margin-bottom: 3px; }
+  .cal-city {
+    display: inline-block; border-radius: 4px; padding: 2px 5px;
+    font-size: 0.65rem; font-weight: bold; color: white; line-height: 1.3;
+    margin-top: 2px;
+  }
+  .cal-exc {
+    display: inline-block; border-radius: 4px; padding: 1px 5px;
+    font-size: 0.6rem; color: white; opacity: 0.85; margin-top: 2px;
+    font-style: italic;
+  }
+  .cal-fly {
+    display: inline-block; font-size: 0.65rem; color: #555; margin-top: 2px;
+  }
+  .bg-osaka    { background: var(--osaka); }
+  .bg-kyoto    { background: var(--kyoto); }
+  .bg-koyasan  { background: var(--koyasan); }
+  .bg-alps     { background: var(--alps); }
+  .bg-tokyo    { background: var(--tokyo); }
+  .bg-fuji     { background: var(--fuji); }
+  .bg-hakone   { background: var(--hakone); }
+  .bg-naoshima { background: var(--naoshima); }
+  .bg-travel   { background: var(--travel); }
+
+  .cal-month-row td {
+    background: #f0ebe0;
+    font-size: 0.65rem; font-weight: bold; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--red);
+    padding: 5px 6px; border: none;
+  }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 20px; font-size: 0.75rem; }
+  .leg { display: flex; align-items: center; gap: 6px; }
+  .leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+  @media(max-width:500px){
+    .hero h1 { font-size: 1.6rem; }
+    .detail-row { grid-template-columns: 36px 22px 130px 1fr; gap: 0 6px; }
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; justify-content: center; gap: 10px;
+    background: var(--ink); padding: 0 20px 20px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    color: #ddd; padding: 8px 20px; border-radius: 20px;
+    font-family: Georgia, serif; font-size: 0.85rem; cursor: pointer;
+  }
+  .tab-btn.active { background: white; color: var(--ink); font-weight: bold; border-color: white; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── PLANNING TAB ── */
+  .plan-grid { display: flex; flex-direction: column; gap: 22px; }
+  .person-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .person-head {
+    background: var(--ink); color: white; padding: 12px 18px;
+    font-size: 1.05rem; font-weight: bold; letter-spacing: 0.03em;
+  }
+  .city-block { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .city-block:last-child { border-bottom: none; }
+  .city-block-title {
+    font-size: 0.92rem; font-weight: bold; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .city-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .task-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .task-item input[type=checkbox] { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--red); cursor: pointer; flex-shrink: 0; }
+  .task-item-body { flex: 1; }
+  .task-item-label { font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; }
+  .task-item-label.done { text-decoration: line-through; color: var(--muted); }
+  .task-comment {
+    width: 100%; border: 1px solid var(--border); border-radius: 6px;
+    padding: 5px 8px; font-family: Georgia, serif; font-size: 0.78rem;
+    color: var(--ink); background: #faf8f4; resize: vertical; min-height: 30px;
+  }
+  .unassigned-card { border: 1px dashed #f59e0b; background: #fffbf0; }
+  .unassigned-tag {
+    font-size: 0.62rem; background: #fff3e0; color: #e65100; border: 1px solid #ffb74d;
+    border-radius: 10px; padding: 1px 8px; margin-left: 6px; font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ HERO ════════════════ -->
+<div class="hero">
+  <h1>🇯🇵 Japón 2026</h1>
+  <div class="dates">18 octubre — 11 noviembre · 25 días · 23 noches</div>
+  <div class="group">
+    <span class="member">✈ Delfina</span>
+    <span class="member">✈ Santi</span>
+    <span class="member">✈ Pepo</span>
+    <span class="member">✈ Cele</span>
+    <span class="member">✈ Sofi</span>
+  </div>
+  <div class="flights">
+    <div class="flight-pill">
+      <strong>✈ BCN → HND</strong>
+      18 oct · 07:55 · Lufthansa
+    </div>
+    <div class="flight-pill">
+      <strong>✈ HND → BCN</strong>
+      11 nov · 22:45 · Lufthansa
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ TABS ════════════════ -->
+<div class="tabs">
+  <button id="btn-itinerario" class="tab-btn" onclick="showTab('itinerario')">📅 Itinerario</button>
+  <button id="btn-planning" class="tab-btn" onclick="showTab('planning')">✅ Planning por persona</button>
+</div>
+
+<div id="tab-itinerario" class="tab-content">
+
+<!-- ════════════════ CALENDAR GRID ════════════════ -->
+<section>
+  <h2>Calendario visual</h2>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--osaka)"></div> Osaka</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--kyoto)"></div> Kyoto</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--koyasan)"></div> Koyasan</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--alps)"></div> Kanazawa / Takayama</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--tokyo)"></div> Tokyo</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--fuji)"></div> Kawaguchiko</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--hakone)"></div> Hakone</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--nikko)"></div> Nikko</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--naoshima)"></div> Excursión</div>
+  </div>
+
+  <div class="cal-wrap">
+    <table class="cal">
+      <thead>
+        <tr>
+          <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cal-month-row"><td colspan="7">OCTUBRE 2026</td></tr>
+        <tr>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="out-trip"><div class="cal-num">1</div></td>
+          <td class="out-trip"><div class="cal-num">2</div></td>
+          <td class="out-trip"><div class="cal-num">3</div></td>
+          <td class="out-trip"><div class="cal-num">4</div></td>
+        </tr>
+        <tr>
+          <td class="out-trip"><div class="cal-num">5</div></td>
+          <td class="out-trip"><div class="cal-num">6</div></td>
+          <td class="out-trip"><div class="cal-num">7</div></td>
+          <td class="out-trip"><div class="cal-num">8</div></td>
+          <td class="out-trip"><div class="cal-num">9</div></td>
+          <td class="out-trip"><div class="cal-num">10</div></td>
+          <td class="out-trip"><div class="cal-num">11</div></td>
+        </tr>
+        <tr>
+          <td class="out-trip"><div class="cal-num">12</div></td>
+          <td class="out-trip"><div class="cal-num">13</div></td>
+          <td class="out-trip"><div class="cal-num">14</div></td>
+          <td class="out-trip"><div class="cal-num">15</div></td>
+          <td class="out-trip"><div class="cal-num">16</div></td>
+          <td><div class="cal-num">17</div></td>
+          <td><div class="cal-num">18</div><div class="cal-city bg-travel">✈ BCN→TYO</div></td>
+        </tr>
+        <tr>
+          <td><div class="cal-num">19 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc bg-travel" style="background:transparent;color:#888">llegada</div></td>
+          <td><div class="cal-num">20 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc" style="color:#888">Dotonbori</div></td>
+          <td><div class="cal-num">21 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc" style="color:#888">Castillo</div></td>
+          <td><div class="cal-num">22 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc bg-naoshima">↗ Naoshima</div></td>
+          <td><div class="cal-num">23 🏠</div><div class="cal-city bg-koyasan">Koyasan</div><div class="cal-exc" style="color:#888">🏯 templo</div></td>
+          <td><div class="cal-num">24 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Kiyomizudera</div></td>
+          <td><div class="cal-num">25 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Fushimi Inari</div></td>
+        </tr>
+        <tr>
+          <td><div class="cal-num">26 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc bg-kyoto" style="opacity:0.65">↗ Nara</div></td>
+          <td><div class="cal-num">27 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Arashiyama</div></td>
+          <td><div class="cal-num">28 🏠</div><div class="cal-city bg-alps">Kanazawa</div><div class="cal-exc" style="color:#888">Kenroku-en</div></td>
+          <td><div class="cal-num">29 🏠</div><div class="cal-city bg-alps">Kanazawa</div><div class="cal-exc bg-alps" style="opacity:0.65">↗ Fukui</div></td>
+          <td><div class="cal-num">30 🏠</div><div class="cal-city bg-alps">Takayama</div><div class="cal-exc" style="color:#888">Sanmachi</div></td>
+          <td><div class="cal-num">31 🏠</div><div class="cal-city bg-alps">Takayama</div><div class="cal-exc" style="color:#888">Koyo 🍂</div></td>
+          <td><div class="cal-num">1 🏠</div><div class="cal-city bg-fuji">Kawaguchiko</div><div class="cal-exc" style="color:#888">🗻 Fuji 🍂</div></td>
+        </tr>
+        <tr class="cal-month-row"><td colspan="7">NOVIEMBRE 2026</td></tr>
+        <tr>
+          <td class="empty"></td>
+          <td><div class="cal-num">2 🏠</div><div class="cal-city bg-hakone">Hakone</div><div class="cal-exc" style="color:#888">♨️ Ryokan</div></td>
+          <td><div class="cal-num">3 🏠</div><div class="cal-city bg-hakone">Hakone</div><div class="cal-exc" style="color:#888">♨️ Ryokan</div></td>
+          <td><div class="cal-num">4 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">llegada</div></td>
+          <td><div class="cal-num">5 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Harajuku</div></td>
+          <td><div class="cal-num">6 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Ginza/teamLab</div></td>
+          <td><div class="cal-num">7 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Asakusa/Ueno</div></td>
+        </tr>
+        <tr>
+          <td><div class="cal-num">8 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc bg-tokyo" style="opacity:0.65">↗ Kamakura</div></td>
+          <td><div class="cal-num">9 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc bg-tokyo" style="opacity:0.65">↗ Nikko opt.</div></td>
+          <td><div class="cal-num">10 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">último día</div></td>
+          <td><div class="cal-num">11</div><div class="cal-city bg-travel">✈ TYO→BCN</div><div class="cal-exc" style="color:#888">22:45</div></td>
+          <td class="out-trip"><div class="cal-num">12</div></td>
+          <td class="out-trip"><div class="cal-num">13</div></td>
+          <td class="out-trip"><div class="cal-num">14</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ DETAIL LIST ════════════════ -->
+<section>
+  <h2>Itinerario detallado</h2>
+  <div class="detail-list">
+
+    <div class="month-sep">Octubre 2026</div>
+
+    <div class="detail-row travel">
+      <div class="d-num">18</div><div class="d-day">sáb</div>
+      <div><div class="d-city">✈ Vuelo BCN → Tokyo</div><div class="d-night">Noche en avión</div></div>
+      <div class="d-note">Lufthansa 07:55 vía Frankfurt</div>
+    </div>
+
+    <div class="detail-row osaka">
+      <div class="d-num">19</div><div class="d-day">dom</div>
+      <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 1 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">HND → Shinkansen → Osaka. Llegar, cenar, dormir. <span class="pill p-spec">✅ RESERVADO — Four Points Flex by Sheraton Kitahama</span></div>
+    </div>
+
+    <div class="detail-row osaka">
+      <div class="d-num">20</div><div class="d-day">lun</div>
+      <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 2 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Dotonbori, Ebisu Bridge, tour gastronómico, Tsutenkaku, Shinsekai</div>
+    </div>
+
+    <div class="detail-row osaka">
+      <div class="d-num">21</div><div class="d-day">mar</div>
+      <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 3 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Castillo de Osaka, Umeda Sky Building, Minamisenba vintage, Nipponbashi <span class="pill p-exc">opt: Hiroshima día</span></div>
+    </div>
+
+    <div class="detail-row osaka">
+      <div class="d-num">22</div><div class="d-day">mié</div>
+      <div><div class="d-city">Osaka + Naoshima</div><div class="d-night">🌙 noche 4 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Excursión Naoshima: Chichu Museum (Tadao Ando+Monet), calabaza Kusama. Los que no van: día libre Osaka <span class="pill p-exc">excursión</span></div>
+    </div>
+
+    <div class="detail-row koyasan">
+      <div class="d-num">23</div><div class="d-day">jue</div>
+      <div><div class="d-city">Koyasan</div><div class="d-night">🌙 noche 5 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Osaka→funicular al Monte Koya (~2h). Shukubo (monasterio), shojin ryori, cementerio Okunoin de noche <span class="pill p-spec">✅ RESERVADO — MYOJI HOUSE 2 Traditional Japanese Stay</span></div>
+    </div>
+
+    <div class="detail-row kyoto">
+      <div class="d-num">24</div><div class="d-day">vie</div>
+      <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 6 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Koyasan→Osaka→Kyoto (~3h). Tarde: Yasaka Shrine, Yasaka Pagoda, Kiyomizu-dera, Higashiyama. Gion al caer el sol. <span class="pill p-spec">✅ RESERVADO — Grace Villa Nijo-jo Castle (Nakagyo-ku)</span></div>
+    </div>
+
+    <div class="detail-row kyoto">
+      <div class="d-num">25</div><div class="d-day">sáb</div>
+      <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 7 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Fushimi Inari toda la mañana <span class="pill p-tip">madrugón</span>. Tarde: Ginkaku-ji, Camino del Filósofo, Nanzen-ji</div>
+    </div>
+
+    <div class="detail-row kyoto">
+      <div class="d-num">26</div><div class="d-day">dom</div>
+      <div><div class="d-city">Kyoto + Nara</div><div class="d-night">🌙 noche 8 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Excursión Nara (45min tren): Todai-ji, Nara Park, Kasuga Taisha, Naramachi <span class="pill p-exc">excursión</span></div>
+    </div>
+
+    <div class="detail-row kyoto">
+      <div class="d-num">27</div><div class="d-day">lun</div>
+      <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 9 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Arashiyama (Bamboo Grove, Tenryu-ji), Kinkaku-ji, Heian Jingu, Nishiki Market</div>
+    </div>
+
+    <div class="detail-row alps">
+      <div class="d-num">28</div><div class="d-day">mar</div>
+      <div><div class="d-city">Kanazawa</div><div class="d-night">🌙 noche 10 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Koyasan→Osaka→Shinkansen Hokuriku. Kenroku-en, Castillo, Nagamachi (samurái), Higashi Chaya (geishas), Omicho (marisco). <span class="pill p-spec">✅ RESERVADO — Hotel Forza Kanazawa (Yasuecho 2-10, 2 noches, 4 personas, €370)</span></div>
+    </div>
+
+    <div class="detail-row alps">
+      <div class="d-num">29</div><div class="d-day">mié</div>
+      <div><div class="d-city">Kanazawa + Fukui</div><div class="d-night">🌙 noche 11 Kanazawa</div></div>
+      <div class="d-note">Excursión Fukui: Castillo Fukui + Daihonzan Eiheiji (templo zen s.XIII entre cedros gigantes) <span class="pill p-exc">excursión</span></div>
+    </div>
+
+    <div class="detail-row alps">
+      <div class="d-num">30</div><div class="d-day">jue</div>
+      <div><div class="d-city">Takayama</div><div class="d-night">🌙 noche 12 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Kanazawa→Takayama bus (1.5h). Sanmachi Suji (casas de sake s.XVII), Hida Folk Village, sake bars. <span class="pill p-spec">✅ RESERVADO — Ryokan Yukimurasaki (Okuhida Onsengo, onsen privado + kaiseki)</span></div>
+    </div>
+
+    <div class="detail-row alps">
+      <div class="d-num">31</div><div class="d-day">vie</div>
+      <div><div class="d-city">Takayama</div><div class="d-night">🌙 noche 13 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Mercado matutino Jinya-mae, Shinhotaka Ropeway (vistas a los Alpes), onsen en el ryokan. Koyo en su pico 🍂</div>
+    </div>
+
+    <div class="month-sep">Noviembre 2026</div>
+
+    <div class="detail-row fuji">
+      <div class="d-num">1</div><div class="d-day">dom</div>
+      <div><div class="d-city">Kawaguchiko</div><div class="d-night">🌙 noche 14 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Takayama→Kawaguchiko bus directo (~3h, Nohi Bus Alps-Fuji) <span class="pill p-move">reservar</span>. Lagos del Fuji, Momiji Corridor con koyo en su pico 🍂 <span class="pill p-spec">✅ RESERVADO — SORAPIA Villa Mt.FUJI Front</span></div>
+    </div>
+
+    <div class="detail-row hakone">
+      <div class="d-num">2</div><div class="d-day">lun</div>
+      <div><div class="d-city">Hakone ♨️</div><div class="d-night">🌙 noche 15 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Kawaguchiko→Hakone (bus 1.5h). Check-in ryokan con onsen y vistas al Fuji. Kaiseki dinner <span class="pill p-spec">✅ RESERVADO — 和一庵 (Waichian)</span></div>
+    </div>
+
+    <div class="detail-row hakone">
+      <div class="d-num">3</div><div class="d-day">mar</div>
+      <div><div class="d-city">Hakone ♨️</div><div class="d-night">🌙 noche 16 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Open-Air Museum, lago Ashi, teleférico Owakudani. Tarde de onsen total en el ryokan</div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">4</div><div class="d-day">mié</div>
+      <div><div class="d-city">Tokyo</div><div class="d-night">🌙 noche 17 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Hakone→Tokyo (Romancecar 90min). Check-in y primera noche: Shinjuku — Golden Gai, Omoide Yokocho, Godzilla Head. <span class="pill p-spec">✅ RESERVADO — KOKO HOTEL Ginza-1chome (Chuo-ku, Ginza)</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">5</div><div class="d-day">jue</div>
+      <div><div class="d-city">Tokyo — Harajuku/Shibuya</div><div class="d-night">🌙 noche 18 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Meiji Jingu, Takeshita St, Shibuya crossing, Yayoi Kusama Museum <span class="pill p-spec">reserva anticipada</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">6</div><div class="d-day">vie</div>
+      <div><div class="d-city">Tokyo — Ginza/Minato</div><div class="d-night">🌙 noche 19 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Tokyo Tower + Zojo-ji, Ginza de día, Roppongi Hills. Noche: teamLab Borderless <span class="pill p-spec">reservar con meses de anticipación</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">7</div><div class="d-day">sáb</div>
+      <div><div class="d-city">Tokyo — Asakusa/Ueno</div><div class="d-night">🌙 noche 20 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Senso-ji, Ueno Park + Tokyo National Museum, Sky Tree al atardecer <span class="pill p-spec">llegar 1h antes</span>, Akihabara <span class="pill p-exc">opt: Nikko día completo en lugar de este día</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">8</div><div class="d-day">dom</div>
+      <div><div class="d-city">Tokyo + Kamakura</div><div class="d-night">🌙 noche 21 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Excursión Kamakura (tren por la costa): Gran Buda, Enoshima, barrio surfer, momiji rojos <span class="pill p-exc">excursión</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">9</div><div class="d-day">lun</div>
+      <div><div class="d-city">Tokyo — día libre</div><div class="d-night">🌙 noche 22 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Imperial Palace, Shimokitazawa, Tsukiji exterior, compras finales. <span class="pill p-exc">opt: Nikko día completo — Tosho-gu, cascada Kegon, lago Chuzenji (2h tren cada sentido)</span></div>
+    </div>
+
+    <div class="detail-row tokyo">
+      <div class="d-num">10</div><div class="d-day">mar</div>
+      <div><div class="d-city">Tokyo — último día</div><div class="d-night">🌙 noche 23 <span class="pill p-res">✓ reservado</span></div></div>
+      <div class="d-note">Compras de última hora, ramen de despedida, último matcha, izakaya de cierre</div>
+    </div>
+
+    <div class="detail-row travel">
+      <div class="d-num">11</div><div class="d-day">mié</div>
+      <div><div class="d-city">✈ Vuelo Tokyo → BCN</div><div class="d-night">Noche en avión</div></div>
+      <div class="d-note">Día libre hasta tarde. HND 22:45 · Lufthansa · Llegan BCN 12 nov</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Presupuesto estimado por persona</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:18px;">No incluye vuelos, Shinkansen ni alojamiento. Solo gasto en destino (23 noches).</p>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.7rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
+      <div>Categoría</div><div style="text-align:right">Mínimo</div><div style="text-align:right">Realista</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #e67e22;font-size:0.82rem;">
+      <div>🍜 Comidas y bebidas</div>
+      <div style="text-align:right;color:var(--muted)">€600</div>
+      <div style="text-align:right;font-weight:bold">€830</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #2980b9;font-size:0.82rem;">
+      <div>🚇 Transporte local (metro, bus, taxi)</div>
+      <div style="text-align:right;color:var(--muted)">€200</div>
+      <div style="text-align:right;font-weight:bold">€250</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #27ae60;font-size:0.82rem;">
+      <div>🎟️ Entradas y tours</div>
+      <div style="text-align:right;color:var(--muted)">€150</div>
+      <div style="text-align:right;font-weight:bold">€220</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #8e44ad;font-size:0.82rem;">
+      <div>🍶 Alcohol y salidas nocturnas</div>
+      <div style="text-align:right;color:var(--muted)">€150</div>
+      <div style="text-align:right;font-weight:bold">€250</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #c0392b;font-size:0.82rem;">
+      <div>🛍️ Ropa, cosmética y objetos</div>
+      <div style="text-align:right;color:var(--muted)">€500</div>
+      <div style="text-align:right;font-weight:bold">€800</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;">
+      <div>TOTAL POR PERSONA</div>
+      <div style="text-align:right;opacity:0.7">€1.600</div>
+      <div style="text-align:right;color:#f5c842">€2.350</div>
+    </div>
+
+  </div>
+  <p style="font-size:0.75rem;color:var(--muted);margin-top:14px;line-height:1.6;">
+    💴 Llevar la mayor parte en <strong>yenes en efectivo</strong> — Takayama, Koyasan y zonas rurales no siempre aceptan tarjeta.<br>
+    💳 Usar tarjeta <strong>WISE</strong> para retirar en cajeros <strong>7-Eleven</strong>, los más confiables para tarjetas extranjeras.<br>
+    🎟️ Reservar online antes de salir: <strong>teamLab Borderless</strong>, <strong>Yayoi Kusama Museum</strong> y <strong>Chichu Art Museum</strong> (Naoshima).
+  </p>
+</section>
+
+<section>
+  <h2>Presupuesto hospedaje — Reservas confirmadas</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:18px;">Precios totales para 4 personas (salvo Kawaguchiko y Hakone, para 5). Todo el hospedaje del viaje está reservado.</p>
+
+  <div style="display:flex;flex-direction:column;gap:6px;">
+
+    <!-- Header -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.68rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
+      <div>Hotel</div><div>Fechas</div><div style="text-align:center">Noches</div><div style="text-align:right">Total (4 pax)</div><div style="text-align:right">Por persona</div>
+    </div>
+
+    <!-- Osaka -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--osaka);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Four Points Flex Kitahama</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Osaka</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">19–23 oct</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div style="text-align:right;font-weight:bold">€427,53</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€106,88</div>
+    </div>
+
+    <!-- Koyasan -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--koyasan);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">MYOJI HOUSE 2 Traditional Japanese Stay</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Koyasan · precio para 4 personas</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">23–24 oct</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div style="text-align:right;font-weight:bold">€112,00</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€28,00</div>
+    </div>
+
+    <!-- Kyoto -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--kyoto);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Grace Villa Nijo-jo Castle</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Kyoto</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">24–28 oct</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div style="text-align:right;font-weight:bold">€750,75</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€187,69</div>
+    </div>
+
+    <!-- Kanazawa -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Hotel Forza Kanazawa</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Ishikawa, Kanazawa, Yasuecho 2-10</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">28–30 oct</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div style="text-align:right;font-weight:bold">€370,00</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€92,50</div>
+    </div>
+
+    <!-- Takayama -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Ryokan Yukimurasaki</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Takayama (Okuhida Onsengo)</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">30 oct–1 nov</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div style="text-align:right;font-weight:bold">€1.196,21</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€299,05</div>
+    </div>
+
+    <!-- Kawaguchiko -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--fuji);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">SORAPIA Villa Mt.FUJI Front</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Kawaguchiko · precio para 5 personas</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">1–2 nov</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div style="text-align:right;font-weight:bold">€279,00</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€55,80</div>
+    </div>
+
+    <!-- Hakone -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--hakone);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">和一庵 (Waichian)</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Hakone · precio para 5 personas</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">2–4 nov</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div style="text-align:right;font-weight:bold">€343,00</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€68,60</div>
+    </div>
+
+    <!-- Tokyo -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--tokyo);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">KOKO Hotel Ginza-1chome</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Tokyo</div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted)">4–11 nov</div>
+      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">7</div>
+      <div style="text-align:right;font-weight:bold">€2.024,76</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€506,19</div>
+    </div>
+
+    <!-- Total -->
+    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;align-items:center;">
+      <div>TOTAL CONFIRMADO (23 noches — ¡hospedaje completo!)</div>
+      <div></div>
+      <div style="text-align:center">23</div>
+      <div style="text-align:right">€5.503,25</div>
+      <div style="text-align:right;color:#f5c842">€1.344,71*</div>
+    </div>
+    <p style="font-size:0.68rem;color:var(--muted);margin-top:2px;">*Kawaguchiko y Hakone a 5 personas, el resto a 4 — no es un total per cápita estrictamente comparable.</p>
+
+  </div>
+</section>
+
+</div>
+<!-- ════════════════ /TAB ITINERARIO ════════════════ -->
+
+<!-- ════════════════ TAB PLANNING ════════════════ -->
+<div id="tab-planning" class="tab-content">
+<section>
+  <h2>Detalle del planning por responsable</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:20px;line-height:1.6;">
+    Cada responsable busca, para su ciudad, un <strong>restaurante bueno</strong>, un <strong>free walking tour</strong> y <strong>lugares interesantes</strong> que no estén ya en el itinerario. Tildá cuando esté resuelto y dejá un comentario con el dato (nombre, link, horario). Los checks y comentarios se guardan en este navegador.
+  </p>
+
+  <div class="plan-grid">
+
+    <!-- SANTI -->
+    <div class="person-card">
+      <div class="person-head">Santi</div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--osaka)"></span>Osaka (19–23 oct)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_osaka_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_osaka_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_osaka_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--alps)"></span>Takayama (30–31 oct)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_takayama_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_takayama_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_takayama_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+    </div>
+
+    <!-- DELFI -->
+    <div class="person-card">
+      <div class="person-head">Delfi</div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--koyasan)"></span>Koyasan (23–24 oct)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_rest">Restaurante / shojin ryori</div><textarea class="task-comment" data-key="jp2026_task_koyasan_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_tour">Tour nocturno Okunoin</div><textarea class="task-comment" data-key="jp2026_task_koyasan_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_koyasan_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--kyoto)"></span>Kyoto (24–28 oct)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kyoto_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kyoto_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kyoto_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+    </div>
+
+    <!-- SOFI -->
+    <div class="person-card">
+      <div class="person-head">Sofi</div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--alps)"></span>Kanazawa (28–30 oct)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--fuji)"></span>Kawaguchiko (1 nov)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--hakone)"></span>Hakone (2–4 nov)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_hakone_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_hakone_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_hakone_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+    </div>
+
+    <!-- PEPO Y CELE -->
+    <div class="person-card">
+      <div class="person-head">Pepo y Cele</div>
+
+      <div class="city-block">
+        <div class="city-block-title"><span class="city-dot" style="background:var(--tokyo)"></span>Tokyo (4–10 nov)</div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_tokyo_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_tokyo_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
+        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_tokyo_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+<!-- ════════════════ /TAB PLANNING ════════════════ -->
+
+<footer style="text-align:center;padding:30px;color:#bbb;font-size:0.72rem;border-top:1px solid var(--border);margin-top:10px;">
+  Japan 2026 · Delfina, Santi, Pepo, Cele &amp; Sofi · Con tips de Negro &amp; Sofi, Gonchu y Fede
+</footer>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('btn-' + name).classList.add('active');
+  try { localStorage.setItem('jp2026_active_tab', name); } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var saved = 'itinerario';
+  try { saved = localStorage.getItem('jp2026_active_tab') || 'itinerario'; } catch(e) {}
+  showTab(saved);
+
+  document.querySelectorAll('.task-check').forEach(function(cb){
+    var key = cb.getAttribute('data-key');
+    var label = document.getElementById('label-' + key);
+    var val = null;
+    try { val = localStorage.getItem(key); } catch(e) {}
+    if(val === '1'){
+      cb.checked = true;
+      if(label) label.classList.add('done');
+    }
+    cb.addEventListener('change', function(){
+      try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch(e) {}
+      if(label){ cb.checked ? label.classList.add('done') : label.classList.remove('done'); }
+    });
+  });
+
+  document.querySelectorAll('.task-comment').forEach(function(ta){
+    var key = ta.getAttribute('data-key');
+    var val = null;
+    try { val = localStorage.getItem(key); } catch(e) {}
+    if(val){ ta.value = val; }
+    ta.addEventListener('input', function(){
+      try { localStorage.setItem(key, ta.value); } catch(e) {}
+    });
+  });
+});
+</script>
+
+</body>
+</html>
