@@ -136,7 +136,7 @@
   }
 
   /* ── CALENDAR GRID ── */
-  .cal-wrap { overflow-x: auto; }
+  .cal-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .cal { border-collapse: collapse; width: 100%; min-width: 560px; }
   .cal th {
     background: var(--ink); color: white;
@@ -186,9 +186,51 @@
   .leg { display: flex; align-items: center; gap: 6px; }
   .leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
 
-  @media(max-width:500px){
-    .hero h1 { font-size: 1.6rem; }
-    .detail-row { grid-template-columns: 36px 22px 130px 1fr; gap: 0 6px; }
+  @media(max-width:640px){
+    body { font-size: 15px; }
+    .hero { padding: 32px 16px 28px; }
+    .hero h1 { font-size: 1.5rem; }
+    .hero .dates { font-size: 0.8rem; }
+    .hero .group { gap: 6px; }
+    .member { padding: 4px 10px; font-size: 0.75rem; }
+    .flights { gap: 10px; }
+    .flight-pill { padding: 6px 12px; font-size: 0.72rem; flex: 1 1 140px; }
+
+    section { padding: 26px 12px; }
+    h2 { font-size: 0.68rem; margin-bottom: 16px; }
+
+    .tabs { padding: 0 12px 16px; }
+    .tab-btn { padding: 7px 14px; font-size: 0.78rem; }
+
+    .summary-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+
+    .detail-row { grid-template-columns: 30px 20px 1fr; gap: 2px 6px; padding: 8px 10px; }
+    .detail-row .d-city { display: block; }
+    .detail-row > div:nth-child(3) { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin-top: 2px; }
+    .detail-row .d-note { grid-column: 1 / -1; margin-top: 4px; }
+    .d-num { font-size: 1.05rem; }
+
+    .cal { min-width: 480px; }
+    .cal td { min-width: 60px; height: 56px; padding: 3px 4px; }
+    .cal-num { font-size: 0.78rem; }
+    .cal-city, .cal-exc { font-size: 0.58rem; }
+    .legend { gap: 6px 10px; font-size: 0.68rem; }
+
+    /* budget & hospedaje tables → stacked cards on mobile */
+    .budget-row, .hosp-row { grid-template-columns: 1fr !important; gap: 3px !important; padding: 10px 12px !important; }
+    .budget-row.budget-head, .hosp-row.hosp-head { display: none !important; }
+    .budget-row > div, .hosp-row > div { text-align: left !important; }
+    .mval, .hval { display: flex !important; gap: 4px; }
+    .mval::before, .hval::before {
+      content: attr(data-label) ":"; font-weight: bold; text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--muted); font-size: 0.62rem; flex-shrink: 0; align-self: center;
+    }
+
+    /* planning tab */
+    .plan-grid { gap: 16px; }
+    .person-head { padding: 10px 14px; font-size: 0.95rem; }
+    .city-block { padding: 12px 14px; }
+    .task-item { gap: 8px; }
   }
 
   /* ── TABS ── */
@@ -528,44 +570,44 @@
   <p style="font-size:0.78rem;color:var(--muted);margin-bottom:18px;">No incluye vuelos, Shinkansen ni alojamiento. Solo gasto en destino (23 noches).</p>
   <div style="display:flex;flex-direction:column;gap:6px;">
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.7rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
+    <div class="budget-row budget-head" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.7rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
       <div>Categoría</div><div style="text-align:right">Mínimo</div><div style="text-align:right">Realista</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #e67e22;font-size:0.82rem;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #e67e22;font-size:0.82rem;">
       <div>🍜 Comidas y bebidas</div>
-      <div style="text-align:right;color:var(--muted)">€600</div>
-      <div style="text-align:right;font-weight:bold">€830</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;color:var(--muted)">€600</div>
+      <div class="mval" data-label="Realista" style="text-align:right;font-weight:bold">€830</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #2980b9;font-size:0.82rem;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #2980b9;font-size:0.82rem;">
       <div>🚇 Transporte local (metro, bus, taxi)</div>
-      <div style="text-align:right;color:var(--muted)">€200</div>
-      <div style="text-align:right;font-weight:bold">€250</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;color:var(--muted)">€200</div>
+      <div class="mval" data-label="Realista" style="text-align:right;font-weight:bold">€250</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #27ae60;font-size:0.82rem;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #27ae60;font-size:0.82rem;">
       <div>🎟️ Entradas y tours</div>
-      <div style="text-align:right;color:var(--muted)">€150</div>
-      <div style="text-align:right;font-weight:bold">€220</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;color:var(--muted)">€150</div>
+      <div class="mval" data-label="Realista" style="text-align:right;font-weight:bold">€220</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #8e44ad;font-size:0.82rem;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #8e44ad;font-size:0.82rem;">
       <div>🍶 Alcohol y salidas nocturnas</div>
-      <div style="text-align:right;color:var(--muted)">€150</div>
-      <div style="text-align:right;font-weight:bold">€250</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;color:var(--muted)">€150</div>
+      <div class="mval" data-label="Realista" style="text-align:right;font-weight:bold">€250</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #c0392b;font-size:0.82rem;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:9px 14px;background:white;border-radius:6px;border-left:4px solid #c0392b;font-size:0.82rem;">
       <div>🛍️ Ropa, cosmética y objetos</div>
-      <div style="text-align:right;color:var(--muted)">€500</div>
-      <div style="text-align:right;font-weight:bold">€800</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;color:var(--muted)">€500</div>
+      <div class="mval" data-label="Realista" style="text-align:right;font-weight:bold">€800</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;">
+    <div class="budget-row" style="display:grid;grid-template-columns:1fr 90px 90px;gap:0 12px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;">
       <div>TOTAL POR PERSONA</div>
-      <div style="text-align:right;opacity:0.7">€1.600</div>
-      <div style="text-align:right;color:#f5c842">€2.350</div>
+      <div class="mval" data-label="Mínimo" style="text-align:right;opacity:0.7">€1.600</div>
+      <div class="mval" data-label="Realista" style="text-align:right;color:#f5c842">€2.350</div>
     </div>
 
   </div>
@@ -583,113 +625,113 @@
   <div style="display:flex;flex-direction:column;gap:6px;">
 
     <!-- Header -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.68rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
+    <div class="hosp-row hosp-head" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.68rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
       <div>Hotel</div><div>Fechas</div><div style="text-align:center">Noches</div><div style="text-align:right">Total (4 pax)</div><div style="text-align:right">Por persona</div>
     </div>
 
     <!-- Osaka -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--osaka);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--osaka);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">Four Points Flex Kitahama</div>
         <div style="font-size:0.72rem;color:var(--muted)">Osaka</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">19–23 oct</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
-      <div style="text-align:right;font-weight:bold">€427,53</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€106,88</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">19–23 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€427,53</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€106,88</div>
     </div>
 
     <!-- Koyasan -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--koyasan);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--koyasan);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">MYOJI HOUSE 2 Traditional Japanese Stay</div>
         <div style="font-size:0.72rem;color:var(--muted)">Koyasan · precio para 4 personas</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">23–24 oct</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
-      <div style="text-align:right;font-weight:bold">€112,00</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€28,00</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">23–24 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€112,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€28,00</div>
     </div>
 
     <!-- Kyoto -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--kyoto);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--kyoto);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">Grace Villa Nijo-jo Castle</div>
         <div style="font-size:0.72rem;color:var(--muted)">Kyoto</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">24–28 oct</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
-      <div style="text-align:right;font-weight:bold">€750,75</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€187,69</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">24–28 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€750,75</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€187,69</div>
     </div>
 
     <!-- Kanazawa -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">Hotel Forza Kanazawa</div>
         <div style="font-size:0.72rem;color:var(--muted)">Ishikawa, Kanazawa, Yasuecho 2-10</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">28–30 oct</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div style="text-align:right;font-weight:bold">€370,00</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€92,50</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">28–30 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€370,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€92,50</div>
     </div>
 
     <!-- Takayama -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">Ryokan Yukimurasaki</div>
         <div style="font-size:0.72rem;color:var(--muted)">Takayama (Okuhida Onsengo)</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">30 oct–1 nov</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div style="text-align:right;font-weight:bold">€1.196,21</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€299,05</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">30 oct–1 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€1.196,21</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€299,05</div>
     </div>
 
     <!-- Kawaguchiko -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--fuji);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--fuji);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">SORAPIA Villa Mt.FUJI Front</div>
         <div style="font-size:0.72rem;color:var(--muted)">Kawaguchiko · precio para 5 personas</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">1–2 nov</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
-      <div style="text-align:right;font-weight:bold">€279,00</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€55,80</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">1–2 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€279,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€55,80</div>
     </div>
 
     <!-- Hakone -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--hakone);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--hakone);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">和一庵 (Waichian)</div>
         <div style="font-size:0.72rem;color:var(--muted)">Hakone · precio para 5 personas</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">2–4 nov</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div style="text-align:right;font-weight:bold">€343,00</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€68,60</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">2–4 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€343,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€68,60</div>
     </div>
 
     <!-- Tokyo -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--tokyo);font-size:0.82rem;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--tokyo);font-size:0.82rem;align-items:center;">
       <div>
         <div style="font-weight:bold;color:var(--ink)">KOKO Hotel Ginza-1chome</div>
         <div style="font-size:0.72rem;color:var(--muted)">Tokyo</div>
       </div>
-      <div style="font-size:0.75rem;color:var(--muted)">4–11 nov</div>
-      <div style="text-align:center;font-size:0.82rem;color:var(--muted)">7</div>
-      <div style="text-align:right;font-weight:bold">€2.024,76</div>
-      <div style="text-align:right;color:var(--muted);font-size:0.78rem">€506,19</div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">4–11 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">7</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€2.024,76</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€506,19</div>
     </div>
 
     <!-- Total -->
-    <div style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;align-items:center;">
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;align-items:center;">
       <div>TOTAL CONFIRMADO (23 noches — ¡hospedaje completo!)</div>
       <div></div>
-      <div style="text-align:center">23</div>
-      <div style="text-align:right">€5.503,25</div>
-      <div style="text-align:right;color:#f5c842">€1.344,71*</div>
+      <div class="hval" data-label="Noches" style="text-align:center">23</div>
+      <div class="hval" data-label="Total" style="text-align:right">€5.503,25</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:#f5c842">€1.344,71*</div>
     </div>
     <p style="font-size:0.68rem;color:var(--muted);margin-top:2px;">*Kawaguchiko y Hakone a 5 personas, el resto a 4 — no es un total per cápita estrictamente comparable.</p>
 
