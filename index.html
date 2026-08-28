@@ -310,6 +310,11 @@
     font-size: 0.74rem; color: var(--muted);
   }
   .pax-note { font-size: 0.7rem; background:#eef2ff; color:#3730a3; border-radius:8px; padding:2px 8px; margin-left:6px; font-weight:bold; }
+
+  .urg-done    { background: #e0f2e9; color: #1b5e20; }
+  .urg-pending { background: #e3f2fd; color: #0d47a1; }
+  .urg-onsite  { background: #f3e8ff; color: #6b21a8; }
+  .paid-by { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -755,123 +760,89 @@
   <h2>Trenes y buses entre ciudades</h2>
   <p style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">
     Precios estimados por persona (cambio ~1€ = 185,9¥, ago 2026). Solo tramos entre ciudades donde dormimos.
-    <br><strong>Ojo con la cantidad de pasajes:</strong> Sofi no hace el tramo Tokyo→Osaka de llegada, no va a Koyasan (ni el tramo Koyasan→Kyoto) y no va a Hakone (ni el tramo Hakone→Tokyo). En esos 5 tramos hay que comprar para <strong>4 personas</strong>, no 5.
+    <br><strong>Ojo con la cantidad de pasajes:</strong> Sofi no hace el tramo Tokyo→Osaka de llegada, no va a Koyasan (ni el tramo Koyasan→Kyoto) y no va a Hakone. En esos tramos hay que comprar/contar para <strong>4 personas</strong>, no 5.
   </p>
   <div class="transport-legend">
-    <span><span class="urgency-badge urg-red">reservar ya</span> - pocas salidas/dia o temporada de koyo</span>
-    <span><span class="urgency-badge urg-yellow">conviene reservar</span> - no urgente, asegura asientos del grupo</span>
-    <span><span class="urgency-badge urg-green">en el momento</span> - frecuente, sin reserva</span>
+    <span><span class="urgency-badge urg-done">✅ Reservado</span></span>
+    <span><span class="urgency-badge urg-pending">🔜 Pendiente</span></span>
+    <span><span class="urgency-badge urg-onsite">📍 Se compra allá</span></span>
     <span><span class="pax-note">4 pax</span> - Sofi no hace este tramo</span>
   </div>
 
   <div class="transport-card osaka">
     <div class="transport-title">18 oct - Llegada HND → Osaka <span class="pax-note">4 pax</span></div>
     <ul class="transport-steps">
-      <li>Keikyu Line Haneda→Shinagawa (15 min) - €1,60 aprox</li>
-      <li>Shinkansen Shinagawa→Shin-Osaka (2h30) - €75-91 aprox</li>
+      <li>Keikyu Line Haneda→Shinagawa (15 min)</li>
+      <li>Shinkansen Shinagawa→Shin-Osaka (2h30)</li>
     </ul>
     <div class="transport-note">*Nota: el Nozomi no lo cubre el JR Pass; si no llevan pase da igual, es el mas rapido. Sofi llega por su cuenta y se suma en Osaka.</div>
+    <div class="paid-by">Pagado por: Delfi</div>
     <div class="transport-footer">
-      <span class="urgency-badge urg-yellow">conviene reservar</span>
-      <span class="transport-book">Reservar en: <a href="https://smart-ex.jp" target="_blank" rel="noopener">SmartEX</a></span>
+      <span class="urgency-badge urg-done">✅ Reservado</span>
+      <span class="transport-book">€103/persona</span>
     </div>
   </div>
 
   <div class="transport-card koyasan">
-    <div class="transport-title">23 oct - Osaka → Koyasan <span class="pax-note">4 pax</span></div>
+    <div class="transport-title">23 oct - Osaka → Koyasan (GRAN Tenku) <span class="pax-note">4 pax</span></div>
     <ul class="transport-steps">
-      <li>Nankai Namba→Gokurakubashi, Express c/transbordo en Hashimoto (1h30) - €5,00 (o Limited Express directo, 1h20 - €9,25)</li>
-      <li>Cable car Gokurakubashi→Koyasan (5 min) - €2,70</li>
+      <li>GRAN Tenku Namba→Gokurakubashi (90 min)</li>
+      <li>Cable car Gokurakubashi→Koyasan (5 min)</li>
     </ul>
-    <div class="transport-note">*Nota: desde abril 2026 existe el tren de lujo GRAN Tenku (90 min, con reserva, suplemento ~€9) si quieren algo especial. Trayecto Namba→Gokurakubashi. Venta de pasajes abre 30 dias antes del viaje. Sofi no va a Koyasan.</div>
+    <div class="transport-note">*Nota: venta de pasajes abre 30 dias antes del viaje (~23 sept 2026). Sofi no va a Koyasan.</div>
+    <div class="paid-by">La saca Delfi cuando se habilite la venta.</div>
     <div class="transport-footer">
-      <span class="urgency-badge urg-green">en el momento</span> (reservar ya si usan GRAN Tenku)
-      <span class="transport-book">Reservar en: taquilla Nankai (tren normal) / <a href="https://www.nankai.co.jp/traffic/kankoutrain/grantenku/en/schedule/index.html" target="_blank" rel="noopener">GRAN Tenku - horarios y reserva</a></span>
+      <span class="urgency-badge urg-pending">🔜 Pendiente</span>
+      <span class="transport-book">€9/persona - <a href="https://nankai-kankou-ticket.triplabo.jp/en/" target="_blank" rel="noopener">reservar</a></span>
     </div>
   </div>
 
   <div class="transport-card kyoto">
     <div class="transport-title">24 oct - Koyasan → Kyoto <span class="pax-note">4 pax</span></div>
     <ul class="transport-steps">
-      <li>Cable car Koyasan→Gokurakubashi (5 min) - €2,70</li>
-      <li>Nankai Gokurakubashi→Namba/Shin-Imamiya (1h20-1h30) - €5,00-9,25</li>
-      <li>JR Loop Line + Special Rapid a Kyoto (~45 min) - €3,00</li>
+      <li>Cable car Koyasan→Gokurakubashi (5 min)</li>
+      <li>Nankai Gokurakubashi→Namba/Shin-Imamiya (1h20-1h30)</li>
+      <li>JR Loop Line + Special Rapid a Kyoto (~45 min)</li>
     </ul>
-    <div class="transport-note">*Nota: total ~3h y ~€11-15 por persona. Todo frecuente, sin reserva. Sofi se suma directo en Kyoto por su cuenta.</div>
+    <div class="transport-note">*Nota: total ~3h. Todo frecuente, sin reserva. Sofi se suma directo en Kyoto por su cuenta.</div>
     <div class="transport-footer">
-      <span class="urgency-badge urg-green">en el momento</span>
-      <span class="transport-book">Reservar en: taquilla / IC card (ICOCA o Suica)</span>
+      <span class="urgency-badge urg-onsite">📍 Se compra allá</span>
+      <span class="transport-book">taquilla / IC card (ICOCA o Suica)</span>
     </div>
   </div>
 
   <div class="transport-card alps">
     <div class="transport-title">28 oct - Kyoto → Kanazawa</div>
     <ul class="transport-steps">
-      <li>Thunderbird Kyoto→Tsuruga (~1h) - €33,10</li>
+      <li>Thunderbird Kyoto→Tsuruga (~1h)</li>
       <li>Transbordo mismo anden en Tsuruga</li>
-      <li>Hokuriku Shinkansen Tsuruga→Kanazawa (~35-45 min) - €22,50</li>
+      <li>Hokuriku Shinkansen Tsuruga→Kanazawa (~35-45 min)</li>
     </ul>
-    <div class="transport-note">*Nota: ya no hay Thunderbird directo a Kanazawa, el transbordo es obligatorio (bien senalizado). Ticket combinado "Hokuriku One-way" por €35 cubre todo el tramo.</div>
+    <div class="transport-note">*Nota: ya no hay Thunderbird directo a Kanazawa, el transbordo es obligatorio (bien senalizado).</div>
+    <div class="paid-by">Pagado por: Pepo</div>
     <div class="transport-footer">
-      <span class="urgency-badge urg-red">reservar ya</span>
-      <span class="transport-book">Reservar en: <a href="https://www.jr-odekake.net/eng/ticket/" target="_blank" rel="noopener">JR-WEST Online Train Reservation</a></span>
+      <span class="urgency-badge urg-done">✅ Reservado</span>
+      <span class="transport-book">€77,14/persona</span>
     </div>
   </div>
 
   <div class="transport-card alps">
-    <div class="transport-title">30 oct - Kanazawa → Takayama</div>
+    <div class="transport-title">30 oct - 4 nov - Kanazawa → Takayama → Kawaguchiko → Hakone → Tokyo (auto de alquiler)</div>
     <ul class="transport-steps">
-      <li>Bus Nohi directo (~3h50) - €18,25-21,50</li>
+      <li>Un solo auto de alquiler para todo el tramo, en vez de trenes/buses sueltos</li>
+      <li>Cubre Kanazawa→Takayama, Takayama→Kawaguchiko y Kawaguchiko→Hakone→Tokyo</li>
     </ul>
-    <div class="transport-note">*Nota: solo 4 salidas/dia. Es el cuello de botella clasico en koyo (pasa por Shirakawa-go), se agota semanas antes.</div>
+    <div class="transport-note">*Nota: reemplaza el bus Nohi, el Hida Wide View via Nagoya y el Romancecar Hakone-Tokyo. Revisar estacionamiento en cada hotel/ryokan y devolucion del auto en Tokyo.</div>
+    <div class="paid-by">Pagado por: Pepo</div>
     <div class="transport-footer">
-      <span class="urgency-badge urg-red">reservar ya</span>
-      <span class="transport-book">Reservar en: <a href="https://japanbusonline.com/en/CourseSearch/11900040002" target="_blank" rel="noopener">japanbusonline.com</a></span>
-    </div>
-  </div>
-
-  <div class="transport-card fuji">
-    <div class="transport-title">1 nov - Takayama → Kawaguchiko (sin bus directo, lo cancelaron)</div>
-    <ul class="transport-steps">
-      <li>Hida Wide View Takayama→Nagoya (~2h40) - €32,30</li>
-      <li>Shinkansen Nagoya→Mishima (~1h) - €43,00</li>
-      <li>Bus Fujikyu Mishima→Kawaguchiko (~1h40) - €13,45</li>
-    </ul>
-    <div class="transport-note">*Nota: total ~5-6h con transbordos, ~€89/persona. Salir temprano de Takayama esa manana.</div>
-    <div class="transport-footer">
-      <span class="urgency-badge urg-red">Hida Wide View</span> <span class="urgency-badge urg-yellow">resto</span>
-      <span class="transport-book">Reservar en: JR-Central/JR-East Online Reservation + <a href="https://www.fujikyu.co.jp/expressway_bus/en/" target="_blank" rel="noopener">Fujikyu Bus</a></span>
-    </div>
-  </div>
-
-  <div class="transport-card hakone">
-    <div class="transport-title">2 nov - Kawaguchiko → Hakone <span class="pax-note">4 pax</span></div>
-    <ul class="transport-steps">
-      <li>Bus Fujikyu/Odakyu Kawaguchiko→Gotemba (~1-1.5h) - €9,40</li>
-      <li>Bus Hakone Tozan / tren JR Gotemba, Gotemba→Odawara→Hakone-Yumoto (~1h) - variable</li>
-    </ul>
-    <div class="transport-note">*Nota: total ~2h25-3h15. El JR Pass no cubre el bus Fujikyu; el Fuji Hakone Pass si cubre todo el tramo. Sofi no va a Hakone.</div>
-    <div class="transport-footer">
-      <span class="urgency-badge urg-yellow">conviene reservar</span>
-      <span class="transport-book">Reservar en: <a href="https://www.fujikyu.co.jp/expressway_bus/en/" target="_blank" rel="noopener">Fujikyu Bus</a> / <a href="https://www.odakyu-highwaybus.com/en/" target="_blank" rel="noopener">Odakyu Highway Bus</a></span>
-    </div>
-  </div>
-
-  <div class="transport-card tokyo">
-    <div class="transport-title">4 nov - Hakone → Tokyo <span class="pax-note">4 pax</span></div>
-    <ul class="transport-steps">
-      <li>Romancecar Odakyu Hakone-Yumoto→Shinjuku (~80 min) - €13,00-13,30</li>
-    </ul>
-    <div class="transport-note">*Nota: uno de los tramos mas demandados, se agota con semanas de anticipacion en temporada alta. Sofi no viene desde Hakone - se suma directo en Tokyo por su cuenta.</div>
-    <div class="transport-footer">
-      <span class="urgency-badge urg-red">reservar ya</span>
-      <span class="transport-book">Reservar en: <a href="https://www.web-odakyu.com/e-romancecar/?language=en" target="_blank" rel="noopener">EMot Online Tickets</a></span>
+      <span class="urgency-badge urg-done">✅ Reservado</span>
+      <span class="transport-book">€915 total</span>
     </div>
   </div>
 
   <p style="font-size:0.75rem;color:var(--muted);margin-top:16px;line-height:1.6;">
-    <strong>Orden de prioridad para reservar:</strong> 1) Romancecar Hakone→Tokyo (4 nov) · 2) Bus Nohi Kanazawa→Takayama (30 oct) · 3) Thunderbird+Shinkansen Kyoto→Kanazawa (28 oct) · 4) Hida Wide View Takayama→Nagoya (1 nov) · 5) GRAN Tenku, si lo quieren (23 oct).<br>
-    Las reservas JR (Thunderbird, Hokuriku Shinkansen, Hida Wide View, Shinkansen Nagoya-Mishima) se abren 1 mes antes del viaje sin JR Pass. Nohi Bus y Romancecar se pueden reservar con mas anticipacion.
+    <strong>Pendiente de reservar:</strong> GRAN Tenku Osaka→Koyasan (Delfi, cuando abra la venta 30 dias antes).<br>
+    <strong>A comprar en el momento:</strong> Koyasan→Kyoto (24 oct).
   </p>
 </section>
 </div>
