@@ -276,6 +276,40 @@
     font-size: 0.62rem; background: #fff3e0; color: #e65100; border: 1px solid #ffb74d;
     border-radius: 10px; padding: 1px 8px; margin-left: 6px; font-weight: bold;
   }
+
+  /* -- TRANSPORTE TAB -- */
+  .transport-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px; border-left: 5px solid #ccc; margin-bottom: 14px;
+  }
+  .transport-card.osaka  { border-left-color: var(--osaka); }
+  .transport-card.koyasan{ border-left-color: var(--koyasan); }
+  .transport-card.kyoto  { border-left-color: var(--kyoto); }
+  .transport-card.alps   { border-left-color: var(--alps); }
+  .transport-card.fuji   { border-left-color: var(--fuji); }
+  .transport-card.hakone { border-left-color: var(--hakone); }
+  .transport-card.tokyo  { border-left-color: var(--tokyo); }
+  .transport-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 10px; }
+  .transport-steps { list-style: none; margin: 0 0 8px; padding: 0; }
+  .transport-steps li { font-size: 0.82rem; padding: 3px 0 3px 14px; position: relative; line-height: 1.4; }
+  .transport-steps li::before { content: "-"; position: absolute; left: 0; color: var(--muted); }
+  .transport-note { font-size: 0.74rem; color: #666; font-style: italic; margin-bottom: 10px; line-height: 1.5; }
+  .transport-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px; font-size: 0.78rem; padding-top: 8px; border-top: 1px dashed var(--border);
+  }
+  .urgency-badge { padding: 2px 10px; border-radius: 10px; font-weight: bold; font-size: 0.68rem; white-space: nowrap; }
+  .urg-red    { background: #fce4ec; color: #c0392b; }
+  .urg-yellow { background: #fff8e1; color: #7c5c00; }
+  .urg-green  { background: #e8f5e9; color: #1b5e20; }
+  .transport-book { text-align: right; }
+  .transport-book a { color: var(--red); font-weight: bold; text-decoration: none; }
+  .transport-book a:hover { text-decoration: underline; }
+  .transport-legend {
+    display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 20px;
+    font-size: 0.74rem; color: var(--muted);
+  }
+  .pax-note { font-size: 0.7rem; background:#eef2ff; color:#3730a3; border-radius:8px; padding:2px 8px; margin-left:6px; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -307,6 +341,8 @@
 <div class="tabs">
   <button id="btn-itinerario" class="tab-btn" onclick="showTab('itinerario')">📅 Itinerario</button>
   <button id="btn-planning" class="tab-btn" onclick="showTab('planning')">✅ Planning por persona</button>
+  <button id="btn-transporte" class="tab-btn" onclick="showTab('transporte')">🚄 Transporte</button>
+  <button id="btn-hoteles" class="tab-btn" onclick="showTab('hoteles')">🏨 Hoteles</button>
 </div>
 
 <div id="tab-itinerario" class="tab-content">
@@ -381,22 +417,22 @@
         </tr>
         <tr class="cal-month-row"><td colspan="7">NOVIEMBRE 2026</td></tr>
         <tr>
-          <td class="empty"></td>
           <td><div class="cal-num">2 🏠</div><div class="cal-city bg-hakone">Hakone</div><div class="cal-exc" style="color:#888">♨️ Ryokan</div></td>
           <td><div class="cal-num">3 🏠</div><div class="cal-city bg-hakone">Hakone</div><div class="cal-exc" style="color:#888">♨️ Ryokan</div></td>
           <td><div class="cal-num">4 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">llegada</div></td>
           <td><div class="cal-num">5 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Harajuku</div></td>
           <td><div class="cal-num">6 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Ginza/teamLab</div></td>
           <td><div class="cal-num">7 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">Asakusa/Ueno</div></td>
+          <td><div class="cal-num">8 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc bg-tokyo" style="opacity:0.65">↗ Kamakura</div></td>
         </tr>
         <tr>
-          <td><div class="cal-num">8 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc bg-tokyo" style="opacity:0.65">↗ Kamakura</div></td>
           <td><div class="cal-num">9 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc bg-tokyo" style="opacity:0.65">↗ Nikko opt.</div></td>
-          <td><div class="cal-num">10 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">último día</div></td>
+          <td><div class="cal-num">10 🏠</div><div class="cal-city bg-tokyo">Tokyo</div><div class="cal-exc" style="color:#888">ultimo dia</div></td>
           <td><div class="cal-num">11</div><div class="cal-city bg-travel">✈ TYO→BCN</div><div class="cal-exc" style="color:#888">22:45</div></td>
           <td class="out-trip"><div class="cal-num">12</div></td>
           <td class="out-trip"><div class="cal-num">13</div></td>
           <td class="out-trip"><div class="cal-num">14</div></td>
+          <td class="out-trip"><div class="cal-num">15</div></td>
         </tr>
       </tbody>
     </table>
@@ -618,125 +654,7 @@
   </p>
 </section>
 
-<section>
-  <h2>Presupuesto hospedaje — Reservas confirmadas</h2>
-  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:18px;">Precios totales para 4 personas (salvo Kawaguchiko y Hakone, para 5). Todo el hospedaje del viaje está reservado.</p>
 
-  <div style="display:flex;flex-direction:column;gap:6px;">
-
-    <!-- Header -->
-    <div class="hosp-row hosp-head" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.68rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
-      <div>Hotel</div><div>Fechas</div><div style="text-align:center">Noches</div><div style="text-align:right">Total (4 pax)</div><div style="text-align:right">Por persona</div>
-    </div>
-
-    <!-- Osaka -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--osaka);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">Four Points Flex Kitahama</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Osaka</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">19–23 oct</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€427,53</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€106,88</div>
-    </div>
-
-    <!-- Koyasan -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--koyasan);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">MYOJI HOUSE 2 Traditional Japanese Stay</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Koyasan · precio para 4 personas</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">23–24 oct</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€112,00</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€28,00</div>
-    </div>
-
-    <!-- Kyoto -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--kyoto);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">Grace Villa Nijo-jo Castle</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Kyoto</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">24–28 oct</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€750,75</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€187,69</div>
-    </div>
-
-    <!-- Kanazawa -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">Hotel Forza Kanazawa</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Ishikawa, Kanazawa, Yasuecho 2-10</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">28–30 oct</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€370,00</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€92,50</div>
-    </div>
-
-    <!-- Takayama -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">Ryokan Yukimurasaki</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Takayama (Okuhida Onsengo)</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">30 oct–1 nov</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€1.196,21</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€299,05</div>
-    </div>
-
-    <!-- Kawaguchiko -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--fuji);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">SORAPIA Villa Mt.FUJI Front</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Kawaguchiko · precio para 5 personas</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">1–2 nov</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€279,00</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€55,80</div>
-    </div>
-
-    <!-- Hakone -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--hakone);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">和一庵 (Waichian)</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Hakone · precio para 5 personas</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">2–4 nov</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€343,00</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€68,60</div>
-    </div>
-
-    <!-- Tokyo -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--tokyo);font-size:0.82rem;align-items:center;">
-      <div>
-        <div style="font-weight:bold;color:var(--ink)">KOKO Hotel Ginza-1chome</div>
-        <div style="font-size:0.72rem;color:var(--muted)">Tokyo</div>
-      </div>
-      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">4–11 nov</div>
-      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">7</div>
-      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€2.024,76</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€506,19</div>
-    </div>
-
-    <!-- Total -->
-    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;align-items:center;">
-      <div>TOTAL CONFIRMADO (23 noches — ¡hospedaje completo!)</div>
-      <div></div>
-      <div class="hval" data-label="Noches" style="text-align:center">23</div>
-      <div class="hval" data-label="Total" style="text-align:right">€5.503,25</div>
-      <div class="hval" data-label="Por persona" style="text-align:right;color:#f5c842">€1.344,71*</div>
-    </div>
-    <p style="font-size:0.68rem;color:var(--muted);margin-top:2px;">*Kawaguchiko y Hakone a 5 personas, el resto a 4 — no es un total per cápita estrictamente comparable.</p>
-
-  </div>
-</section>
 
 </div>
 <!-- ════════════════ /TAB ITINERARIO ════════════════ -->
@@ -831,6 +749,243 @@
 </section>
 </div>
 <!-- ════════════════ /TAB PLANNING ════════════════ -->
+
+<div id="tab-transporte" class="tab-content">
+<section>
+  <h2>Trenes y buses entre ciudades</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">
+    Precios estimados por persona (cambio ~1€ = 185,9¥, ago 2026). Solo tramos entre ciudades donde dormimos.
+    <br><strong>Ojo con la cantidad de pasajes:</strong> Sofi no hace el tramo Tokyo→Osaka de llegada, no va a Koyasan (ni el tramo Koyasan→Kyoto) y no va a Hakone (ni el tramo Hakone→Tokyo). En esos 5 tramos hay que comprar para <strong>4 personas</strong>, no 5.
+  </p>
+  <div class="transport-legend">
+    <span><span class="urgency-badge urg-red">reservar ya</span> - pocas salidas/dia o temporada de koyo</span>
+    <span><span class="urgency-badge urg-yellow">conviene reservar</span> - no urgente, asegura asientos del grupo</span>
+    <span><span class="urgency-badge urg-green">en el momento</span> - frecuente, sin reserva</span>
+    <span><span class="pax-note">4 pax</span> - Sofi no hace este tramo</span>
+  </div>
+
+  <div class="transport-card osaka">
+    <div class="transport-title">18 oct - Llegada HND → Osaka <span class="pax-note">4 pax</span></div>
+    <ul class="transport-steps">
+      <li>Keikyu Line Haneda→Shinagawa (15 min) - €1,60 aprox</li>
+      <li>Shinkansen Shinagawa→Shin-Osaka (2h30) - €75-91 aprox</li>
+    </ul>
+    <div class="transport-note">*Nota: el Nozomi no lo cubre el JR Pass; si no llevan pase da igual, es el mas rapido. Sofi llega por su cuenta y se suma en Osaka.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-yellow">conviene reservar</span>
+      <span class="transport-book">Reservar en: <a href="https://smart-ex.jp" target="_blank" rel="noopener">SmartEX</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card koyasan">
+    <div class="transport-title">23 oct - Osaka → Koyasan <span class="pax-note">4 pax</span></div>
+    <ul class="transport-steps">
+      <li>Nankai Namba→Gokurakubashi, Express c/transbordo en Hashimoto (1h30) - €5,00 (o Limited Express directo, 1h20 - €9,25)</li>
+      <li>Cable car Gokurakubashi→Koyasan (5 min) - €2,70</li>
+    </ul>
+    <div class="transport-note">*Nota: desde abril 2026 existe el tren de lujo GRAN Tenku (90 min, con reserva, suplemento ~€9) si quieren algo especial. Trayecto Namba→Gokurakubashi. Venta de pasajes abre 30 dias antes del viaje. Sofi no va a Koyasan.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-green">en el momento</span> (reservar ya si usan GRAN Tenku)
+      <span class="transport-book">Reservar en: taquilla Nankai (tren normal) / <a href="https://www.nankai.co.jp/traffic/kankoutrain/grantenku/en/schedule/index.html" target="_blank" rel="noopener">GRAN Tenku - horarios y reserva</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card kyoto">
+    <div class="transport-title">24 oct - Koyasan → Kyoto <span class="pax-note">4 pax</span></div>
+    <ul class="transport-steps">
+      <li>Cable car Koyasan→Gokurakubashi (5 min) - €2,70</li>
+      <li>Nankai Gokurakubashi→Namba/Shin-Imamiya (1h20-1h30) - €5,00-9,25</li>
+      <li>JR Loop Line + Special Rapid a Kyoto (~45 min) - €3,00</li>
+    </ul>
+    <div class="transport-note">*Nota: total ~3h y ~€11-15 por persona. Todo frecuente, sin reserva. Sofi se suma directo en Kyoto por su cuenta.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-green">en el momento</span>
+      <span class="transport-book">Reservar en: taquilla / IC card (ICOCA o Suica)</span>
+    </div>
+  </div>
+
+  <div class="transport-card alps">
+    <div class="transport-title">28 oct - Kyoto → Kanazawa</div>
+    <ul class="transport-steps">
+      <li>Thunderbird Kyoto→Tsuruga (~1h) - €33,10</li>
+      <li>Transbordo mismo anden en Tsuruga</li>
+      <li>Hokuriku Shinkansen Tsuruga→Kanazawa (~35-45 min) - €22,50</li>
+    </ul>
+    <div class="transport-note">*Nota: ya no hay Thunderbird directo a Kanazawa, el transbordo es obligatorio (bien senalizado). Ticket combinado "Hokuriku One-way" por €35 cubre todo el tramo.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-red">reservar ya</span>
+      <span class="transport-book">Reservar en: <a href="https://www.jr-odekake.net/eng/ticket/" target="_blank" rel="noopener">JR-WEST Online Train Reservation</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card alps">
+    <div class="transport-title">30 oct - Kanazawa → Takayama</div>
+    <ul class="transport-steps">
+      <li>Bus Nohi directo (~3h50) - €18,25-21,50</li>
+    </ul>
+    <div class="transport-note">*Nota: solo 4 salidas/dia. Es el cuello de botella clasico en koyo (pasa por Shirakawa-go), se agota semanas antes.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-red">reservar ya</span>
+      <span class="transport-book">Reservar en: <a href="https://japanbusonline.com/en/CourseSearch/11900040002" target="_blank" rel="noopener">japanbusonline.com</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card fuji">
+    <div class="transport-title">1 nov - Takayama → Kawaguchiko (sin bus directo, lo cancelaron)</div>
+    <ul class="transport-steps">
+      <li>Hida Wide View Takayama→Nagoya (~2h40) - €32,30</li>
+      <li>Shinkansen Nagoya→Mishima (~1h) - €43,00</li>
+      <li>Bus Fujikyu Mishima→Kawaguchiko (~1h40) - €13,45</li>
+    </ul>
+    <div class="transport-note">*Nota: total ~5-6h con transbordos, ~€89/persona. Salir temprano de Takayama esa manana.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-red">Hida Wide View</span> <span class="urgency-badge urg-yellow">resto</span>
+      <span class="transport-book">Reservar en: JR-Central/JR-East Online Reservation + <a href="https://www.fujikyu.co.jp/expressway_bus/en/" target="_blank" rel="noopener">Fujikyu Bus</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card hakone">
+    <div class="transport-title">2 nov - Kawaguchiko → Hakone <span class="pax-note">4 pax</span></div>
+    <ul class="transport-steps">
+      <li>Bus Fujikyu/Odakyu Kawaguchiko→Gotemba (~1-1.5h) - €9,40</li>
+      <li>Bus Hakone Tozan / tren JR Gotemba, Gotemba→Odawara→Hakone-Yumoto (~1h) - variable</li>
+    </ul>
+    <div class="transport-note">*Nota: total ~2h25-3h15. El JR Pass no cubre el bus Fujikyu; el Fuji Hakone Pass si cubre todo el tramo. Sofi no va a Hakone.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-yellow">conviene reservar</span>
+      <span class="transport-book">Reservar en: <a href="https://www.fujikyu.co.jp/expressway_bus/en/" target="_blank" rel="noopener">Fujikyu Bus</a> / <a href="https://www.odakyu-highwaybus.com/en/" target="_blank" rel="noopener">Odakyu Highway Bus</a></span>
+    </div>
+  </div>
+
+  <div class="transport-card tokyo">
+    <div class="transport-title">4 nov - Hakone → Tokyo <span class="pax-note">4 pax</span></div>
+    <ul class="transport-steps">
+      <li>Romancecar Odakyu Hakone-Yumoto→Shinjuku (~80 min) - €13,00-13,30</li>
+    </ul>
+    <div class="transport-note">*Nota: uno de los tramos mas demandados, se agota con semanas de anticipacion en temporada alta. Sofi no viene desde Hakone - se suma directo en Tokyo por su cuenta.</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-red">reservar ya</span>
+      <span class="transport-book">Reservar en: <a href="https://www.web-odakyu.com/e-romancecar/?language=en" target="_blank" rel="noopener">EMot Online Tickets</a></span>
+    </div>
+  </div>
+
+  <p style="font-size:0.75rem;color:var(--muted);margin-top:16px;line-height:1.6;">
+    <strong>Orden de prioridad para reservar:</strong> 1) Romancecar Hakone→Tokyo (4 nov) · 2) Bus Nohi Kanazawa→Takayama (30 oct) · 3) Thunderbird+Shinkansen Kyoto→Kanazawa (28 oct) · 4) Hida Wide View Takayama→Nagoya (1 nov) · 5) GRAN Tenku, si lo quieren (23 oct).<br>
+    Las reservas JR (Thunderbird, Hokuriku Shinkansen, Hida Wide View, Shinkansen Nagoya-Mishima) se abren 1 mes antes del viaje sin JR Pass. Nohi Bus y Romancecar se pueden reservar con mas anticipacion.
+  </p>
+</section>
+</div>
+<div id="tab-hoteles" class="tab-content">
+<section>
+  <h2>Presupuesto hospedaje - Reservas confirmadas</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:18px;">Precios totales para 4 personas (salvo Kawaguchiko y Hakone, para 5). Todo el hospedaje del viaje esta reservado.</p>
+
+  <div style="display:flex;flex-direction:column;gap:6px;">
+
+    <div class="hosp-row hosp-head" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:7px 14px;background:#f0ebe0;border-radius:6px;font-size:0.68rem;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">
+      <div>Hotel</div><div>Fechas</div><div style="text-align:center">Noches</div><div style="text-align:right">Total (4 pax)</div><div style="text-align:right">Por persona</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--osaka);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Four Points Flex Kitahama</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Osaka</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">19-23 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€427,53</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€106,88</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--koyasan);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">MYOJI HOUSE 2 Traditional Japanese Stay</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Koyasan - precio para 4 personas</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">23-24 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€112,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€28,00</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--kyoto);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Grace Villa Nijo-jo Castle</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Kyoto</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">24-28 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">4</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€750,75</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€187,69</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Hotel Forza Kanazawa</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Ishikawa, Kanazawa, Yasuecho 2-10</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">28-30 oct</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€370,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€92,50</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--alps);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">Ryokan Yukimurasaki</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Takayama (Okuhida Onsengo)</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">30 oct-1 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€1.196,21</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€299,05</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--fuji);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">SORAPIA Villa Mt.FUJI Front</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Kawaguchiko - precio para 5 personas</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">1-2 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">1</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€279,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€55,80</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--hakone);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">和一庵 (Waichian)</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Hakone - precio para 5 personas</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">2-4 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">2</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€343,00</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€68,60</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:10px 14px;background:white;border-radius:6px;border-left:4px solid var(--tokyo);font-size:0.82rem;align-items:center;">
+      <div>
+        <div style="font-weight:bold;color:var(--ink)">KOKO Hotel Ginza-1chome</div>
+        <div style="font-size:0.72rem;color:var(--muted)">Tokyo</div>
+      </div>
+      <div class="hval" data-label="Fechas" style="font-size:0.75rem;color:var(--muted)">4-11 nov</div>
+      <div class="hval" data-label="Noches" style="text-align:center;font-size:0.82rem;color:var(--muted)">7</div>
+      <div class="hval" data-label="Total" style="text-align:right;font-weight:bold">€2.024,76</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:var(--muted);font-size:0.78rem">€506,19</div>
+    </div>
+
+    <div class="hosp-row" style="display:grid;grid-template-columns:1fr 100px 50px 90px 90px;gap:0 10px;padding:12px 14px;background:var(--ink);border-radius:6px;font-size:0.88rem;font-weight:bold;color:white;margin-top:4px;align-items:center;">
+      <div>TOTAL CONFIRMADO (23 noches)</div>
+      <div></div>
+      <div class="hval" data-label="Noches" style="text-align:center">23</div>
+      <div class="hval" data-label="Total" style="text-align:right">€5.503,25</div>
+      <div class="hval" data-label="Por persona" style="text-align:right;color:#f5c842">€1.344,71*</div>
+    </div>
+    <p style="font-size:0.68rem;color:var(--muted);margin-top:2px;">*Kawaguchiko y Hakone a 5 personas, el resto a 4 - no es un total per capita estrictamente comparable.</p>
+
+  </div>
+</section>
+</div>
 
 <footer style="text-align:center;padding:30px;color:#bbb;font-size:0.72rem;border-top:1px solid var(--border);margin-top:10px;">
   Japan 2026 · Delfina, Santi, Pepo, Cele &amp; Sofi · Con tips de Negro &amp; Sofi, Gonchu y Fede
