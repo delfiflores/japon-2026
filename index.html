@@ -315,6 +315,18 @@
   .urg-pending { background: #e3f2fd; color: #0d47a1; }
   .urg-onsite  { background: #f3e8ff; color: #6b21a8; }
   .paid-by { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 4px; }
+
+  /* -- LINEAS DE TRANSPORTE Y ENTRADAS EN EL DETALLE DIARIO -- */
+  .d-tr, .d-tk { display:block; margin-top:6px; font-size:0.74rem; line-height:1.45; border-radius:6px; padding:5px 9px; }
+  .d-tr { background:#eef4fc; color:#0d47a1; border-left:3px solid #64a0e6; }
+  .d-tk { background:#edf7ee; color:#1b5e20; border-left:3px solid #66bb6a; }
+  .d-tk.warn { background:#fff8e1; color:#7c5c00; border-left-color:#f5b800; }
+
+  .bought { margin: 0; padding: 12px 18px; background:#edf7ee; border-bottom:1px solid var(--border); font-size:0.8rem; line-height:1.5; color:#1b5e20; }
+  .bought-title { font-weight:bold; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; }
+  .bought ul { list-style:none; margin:0; padding:0; }
+  .bought li { padding:2px 0; }
+  .bought li.warn { color:#7c5c00; }
 </style>
 </head>
 <body>
@@ -345,7 +357,7 @@
 <!-- ════════════════ TABS ════════════════ -->
 <div class="tabs">
   <button id="btn-itinerario" class="tab-btn" onclick="showTab('itinerario')">📅 Itinerario</button>
-  <button id="btn-planning" class="tab-btn" onclick="showTab('planning')">✅ Planning por persona</button>
+  <button id="btn-entradas" class="tab-btn" onclick="showTab('entradas')">🎟️ Entradas y reservas</button>
   <button id="btn-transporte" class="tab-btn" onclick="showTab('transporte')">🚄 Transporte</button>
   <button id="btn-hoteles" class="tab-btn" onclick="showTab('hoteles')">🏨 Hoteles</button>
 </div>
@@ -405,11 +417,11 @@
         <tr>
           <td><div class="cal-num">19 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc bg-travel" style="background:transparent;color:#888">llegada</div></td>
           <td><div class="cal-num">20 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc" style="color:#888">Dotonbori</div></td>
-          <td><div class="cal-num">21 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc" style="color:#888">Castillo</div></td>
-          <td><div class="cal-num">22 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc bg-naoshima">↗ Nara</div></td>
+          <td><div class="cal-num">21 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc" style="color:#888">Castillo · 🥋 sumo</div></td>
+          <td><div class="cal-num">22 🏠</div><div class="cal-city bg-osaka">Osaka</div><div class="cal-exc bg-naoshima">↗ Nara</div><div class="cal-exc" style="color:#888">🍢 tour comida</div></td>
           <td><div class="cal-num">23 🏠</div><div class="cal-city bg-koyasan">Koyasan</div><div class="cal-exc" style="color:#888">🏯 templo</div></td>
           <td><div class="cal-num">24 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Fushimi 🎂</div></td>
-          <td><div class="cal-num">25 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Higashiyama</div></td>
+          <td><div class="cal-num">25 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">🍵 té · NAKED</div></td>
         </tr>
         <tr>
           <td><div class="cal-num">26 🏠</div><div class="cal-city bg-kyoto">Kyoto</div><div class="cal-exc" style="color:#888">Arashiyama</div></td>
@@ -460,79 +472,79 @@
     <div class="detail-row osaka">
       <div class="d-num">19</div><div class="d-day">lun</div>
       <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 1 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">HND → Shinkansen → Osaka. Llegar, cenar, dormir. <span class="pill p-spec">✅ RESERVADO — Four Points Flex by Sheraton Kitahama</span></div>
+      <div class="d-note">HND → Shinkansen → Osaka. Llegar, cenar, dormir. <span class="pill p-spec">✅ RESERVADO — Four Points Flex by Sheraton Kitahama</span><div class="d-tr">🚆 HND → Keikyu a Shinagawa (15 min) → Shinkansen Nozomi a Shin-Osaka (2h30) · ✅ pasajes comprados (4 pax; Sofi llega por su cuenta). Comprar ICOCA en el aeropuerto.</div></div>
     </div>
 
     <div class="detail-row osaka">
       <div class="d-num">20</div><div class="d-day">mar</div>
       <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 2 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Dotonbori, Ebisu Bridge, tour gastronómico, Tsutenkaku, Shinsekai</div>
+      <div class="d-note">Dotonbori, Ebisu Bridge, Tsutenkaku, Shinsekai<div class="d-tr">🚇 Todo en metro de Osaka + a pie (ICOCA).</div></div>
     </div>
 
     <div class="detail-row osaka">
       <div class="d-num">21</div><div class="d-day">mié</div>
       <div><div class="d-city">Osaka</div><div class="d-night">🌙 noche 3 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Castillo de Osaka, Umeda Sky Building, Minamisenba vintage, Nipponbashi <span class="pill p-exc">opt: Hiroshima día</span></div>
+      <div class="d-note">Castillo de Osaka, Umeda Sky Building, Minamisenba vintage, Nipponbashi<div class="d-tr">🚇 Metro de Osaka + a pie (ICOCA). Free walking tour en inglés (Osaka Free Walking Tour Official).</div><div class="d-tk">🎟️ <strong>17:00 Show de sumo</strong> con caja bento + 1 bebida · 5 pax · €350,16 total (~€70,03/p) · ✅ pago confirmado</div></div>
     </div>
 
     <div class="detail-row osaka">
       <div class="d-num">22</div><div class="d-day">jue</div>
       <div><div class="d-city">Osaka + Nara</div><div class="d-night">🌙 noche 4 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Excursión Nara desde Osaka (~40 min, Kintetsu desde Namba): Todai-ji, Nara Park, Kasuga Taisha, Naramachi <span class="pill p-exc">excursión</span> Reemplaza a Naoshima (cancelada).</div>
+      <div class="d-note">Excursión Nara desde Osaka (~40 min, Kintetsu desde Namba): Todai-ji, Nara Park, Kasuga Taisha, Naramachi <span class="pill p-exc">excursión</span> Reemplaza a Naoshima (cancelada).<div class="d-tr">🚆 Kintetsu Namba → Kintetsu-Nara (~40 min). Volver a Osaka a tiempo para el tour de las 18:30.</div><div class="d-tk">🎟️ <strong>18:30 Tour gastronómico guiado</strong> (12 platos + 2 bebidas) · ✅ comprado · 5 pax · €293,43 total (~€58,69/p)</div></div>
     </div>
 
     <div class="detail-row koyasan">
       <div class="d-num">23</div><div class="d-day">vie</div>
       <div><div class="d-city">Koyasan</div><div class="d-night">🌙 noche 5 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Limited Express Koya desde Nankai Namba (~10:00, ~¥2.030/persona, se compra en la taquilla el mismo día; el GRAN Tenku no se consiguió). Tarde: Danjo Garan, Kongobuji, Okunoin al atardecer (salir ~16:15). Cena en el shukubo. <span class="pill p-spec">✅ RESERVADO — MYOJI HOUSE 2 Traditional Japanese Stay</span></div>
+      <div class="d-note">Salida ~10:00. Tarde: Danjo Garan, Kongobuji, Okunoin al atardecer (salir ~16:15). Cena en el shukubo. <span class="pill p-spec">✅ RESERVADO — MYOJI HOUSE 2 Traditional Japanese Stay</span><div class="d-tr">🚆 Nankai Namba → Gokurakubashi (Limited Express Koya, ~80 min) + cable car (5 min) · 📍 se compra en la taquilla el mismo día (~¥2.030/p; el GRAN Tenku no se consiguió) · 4 pax. En Koyasan: a pie o bus local.</div></div>
     </div>
 
     <div class="detail-row kyoto">
       <div class="d-num">24</div><div class="d-day">sáb</div>
       <div><div class="d-city">Koyasan → Kyoto 🎂</div><div class="d-night">🌙 noche 6 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Cumple de Delfi. Mañana: oración y check-out, tren a Kyoto (llegada ~14:30). Tarde: dejar maletas y <strong>Fushimi Inari</strong> al atardecer (mejor desde las 16:30). Noche: cena en <strong>Pontocho</strong> (reservar, somos 5), karaoke (Super Jankara Kawaramachi) y fiesta si hay ganas (World Kyoto / Club Metro). <span class="pill p-spec">✅ RESERVADO — Grace Villa Nijo-jo Castle (Nakagyo-ku)</span></div>
+      <div class="d-note">Cumple de Delfi. Mañana: oración y check-out, tren a Kyoto (llegada ~14:30). Tarde: dejar maletas y <strong>Fushimi Inari</strong> al atardecer (mejor desde las 16:30). Noche: cena en <strong>Pontocho</strong> (reservar, somos 5), karaoke (Super Jankara Kawaramachi) y fiesta si hay ganas (World Kyoto / Club Metro). <span class="pill p-spec">✅ RESERVADO — Grace Villa Nijo-jo Castle (Nakagyo-ku)</span><div class="d-tr">🚆 Cable car + Nankai a Namba/Shin-Imamiya + JR a Kyoto (~3 h) · 📍 sin reserva · 4 pax (Sofi se suma en Kyoto). Luego JR Nara Line Kyoto → Inari (5 min) y Keihan Fushimi-Inari → Gion-Shijo (~15 min) para Pontocho.</div></div>
     </div>
 
     <div class="detail-row kyoto">
       <div class="d-num">25</div><div class="d-day">dom</div>
       <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 7 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Mañana: free walking tour en español por Gion e Higashiyama (3 h, propina libre, máx. 5 personas, reserva abre 10-14 días antes). Tarde: Kiyomizu-dera y tiempo libre. Noche: cena cerca del hotel y NAKED en el castillo Nijo <span class="pill p-tip">por confirmar</span></div>
+      <div class="d-note">Mañana: <strong>ceremonia del té en Gion (09:30–11:00)</strong>. Después: free walking tour en español por Gion e Higashiyama (3 h, propina libre, máx. 5 personas, reserva abre 10-14 días antes) <span class="pill p-tip">elegir horario que no se pise con el té</span>. Tarde: Kiyomizu-dera y tiempo libre. Noche: cena cerca del hotel y NAKED en el castillo Nijo <span class="pill p-res">✓ entradas compradas</span><div class="d-tr">🚇 Metro Tozai desde Nijojo-mae a Higashiyama (~15 min) y a pie por Gion. NAKED: a pie/metro desde el hotel (Nijo).</div><div class="d-tk">🎟️ <strong>09:30–11:00 Ceremonia del té</strong> (Gion Orizuruya, sesión matutina) · ✅ reservada y pagada · 5 pax · ¥38.500 total (¥7.700/p, ~€41/p)</div><div class="d-tk">🎟️ <strong>NAKED meets Nijo-jo Castle</strong> (entrada early bird) · ✅ comprada · 5 pax · €66,61 total (~€13,32/p)</div></div>
     </div>
 
     <div class="detail-row kyoto">
       <div class="d-num">26</div><div class="d-day">lun</div>
       <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 8 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Mañana: Arashiyama (Bamboo Grove antes de las 8:00, Tenryu-ji, puente Togetsukyo). Tarde: Kinkaku-ji y descanso. Noche: cena en Gion. <span class="pill p-tip">Nara ya no va desde Kyoto: se hace desde Osaka el 22</span></div>
+      <div class="d-note">Mañana: Arashiyama (Bamboo Grove antes de las 8:00, Tenryu-ji, puente Togetsukyo). Tarde: Kinkaku-ji y descanso. Noche: cena en Gion. <span class="pill p-tip">Nara ya no va desde Kyoto: se hace desde Osaka el 22</span><div class="d-tr">🚆 JR Sagano desde Nijo → Saga-Arashiyama (~15 min). Kinkaku-ji en bus urbano. Vuelta a Gion en bus/metro.</div></div>
     </div>
 
     <div class="detail-row kyoto">
       <div class="d-num">27</div><div class="d-day">mar</div>
       <div><div class="d-city">Kyoto</div><div class="d-night">🌙 noche 9 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Miho Museum todo el día (cierra los lunes): metro a Kyoto Station, JR a Ishiyama y bus Teisan (~50 min), salir ~8:15. Cena en Kyoto Station (Kyoto Ramen Koji).</div>
+      <div class="d-note">Miho Museum todo el día (cierra los lunes). Cena en Kyoto Station (Kyoto Ramen Koji).<div class="d-tr">🚆 Metro a Kyoto Station → JR Biwako a Ishiyama → bus Teisan (~50 min) · salir ~8:15. Los tramos se pagan con IC card/en el bus.</div></div>
     </div>
 
     <div class="detail-row alps">
       <div class="d-num">28</div><div class="d-day">mié</div>
       <div><div class="d-city">Kyoto → Kanazawa</div><div class="d-night">🌙 noche 10 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Mañana: Garden of Fine Arts (abre 9:00, solo los que quieran ir; el resto descansa). Mediodía: Nishiki Market y Teramachi. Tren 16:08 (Thunderbird 31 a Tsuruga, trasbordo Kagayaki 514, llegada 17:55). Kenroku-en, Castillo, Nagamachi, Higashi Chaya y Omicho quedan para el 29. <span class="pill p-spec">✅ RESERVADO — Hotel Forza Kanazawa (Yasuecho 2-10, 2 noches, 4 personas, €370)</span></div>
+      <div class="d-note">Mañana: Garden of Fine Arts (abre 9:00, solo los que quieran ir; el resto descansa). Mediodía: Nishiki Market y Teramachi. Tren 16:08 (Thunderbird 31 a Tsuruga, trasbordo Kagayaki 514, llegada 17:55). Kenroku-en, Castillo, Nagamachi, Higashi Chaya y Omicho quedan para el 29. <span class="pill p-spec">✅ RESERVADO — Hotel Forza Kanazawa (Yasuecho 2-10, 2 noches, 4 personas, €370)</span><div class="d-tr">🚇 Metro Karasuma → Kitayama (Garden of Fine Arts, mañana). 🚆 16:08 Thunderbird 31 a Tsuruga → trasbordo 17:13 Kagayaki 514 → llega 17:55 · ✅ comprado (5 asientos) · pagado por Pepo (€77,14/p).</div></div>
     </div>
 
     <div class="detail-row alps">
       <div class="d-num">29</div><div class="d-day">jue</div>
       <div><div class="d-city">Kanazawa + Fukui</div><div class="d-night">🌙 noche 11 Kanazawa</div></div>
-      <div class="d-note">Excursión Fukui: Castillo Fukui + Daihonzan Eiheiji (templo zen s.XIII entre cedros gigantes) <span class="pill p-exc">excursión</span></div>
+      <div class="d-note">Excursión Fukui: Castillo Fukui + Daihonzan Eiheiji (templo zen s.XIII entre cedros gigantes) <span class="pill p-exc">excursión</span><div class="d-tr">🚆 Kanazawa → Fukui en Hokuriku Shinkansen (~25 min) + bus a Eiheiji (~30 min) · 📍 se compra allá (último día sin auto).</div><div class="d-tk warn">⚠️ El 28 se dijo que Kenroku-en, Castillo, Nagamachi, Higashi Chaya y Omicho quedaban para hoy: decidir si se hacen a la vuelta de Fukui o se recortan.</div></div>
     </div>
 
     <div class="detail-row alps">
       <div class="d-num">30</div><div class="d-day">vie</div>
       <div><div class="d-city">Takayama</div><div class="d-night">🌙 noche 12 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Kanazawa→Takayama bus (1.5h). Sanmachi Suji (casas de sake s.XVII), Hida Folk Village, sake bars. <span class="pill p-spec">✅ RESERVADO — Ryokan Yukimurasaki (Okuhida Onsengo, onsen privado + kaiseki)</span></div>
+      <div class="d-note">Día completo en Takayama pueblo: Sanmachi Suji (casas de sake s.XVII), Hida Folk Village, sake bars; a la tarde-noche al ryokan en Okuhida. <span class="pill p-spec">✅ RESERVADO — Ryokan Yukimurasaki (Okuhida Onsengo, onsen privado + kaiseki)</span><div class="d-tr">🚗 <strong>Auto de alquiler</strong> (✅ reservado · €915 total · pagado por Santi): Kanazawa → Takayama (~2 h por autopista, con peajes). Tarde-noche: Takayama → Okuhida Onsengo (~1 h). Recoger el auto en Kanazawa (lugar y hora por confirmar).</div></div>
     </div>
 
     <div class="detail-row alps">
       <div class="d-num">31</div><div class="d-day">sáb</div>
       <div><div class="d-city">Takayama</div><div class="d-night">🌙 noche 13 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Mercado matutino Jinya-mae, Shinhotaka Ropeway (vistas a los Alpes), onsen en el ryokan. Koyo en su pico 🍂</div>
+      <div class="d-note">Zona del ryokan: trekking en la montaña, termas y cascada Hirayu Otaki. Por decidir: teleférico Shinhotaka (vistas a los Alpes) o Kamikochi. Koyo en su pico 🍂<div class="d-tr">🚗 Auto desde el ryokan por la zona de Okuhida/Hirayu. Ojo: a Kamikochi no se entra en auto (se deja en Sawando/Akandana y se sigue en bus).</div></div>
     </div>
 
     <div class="month-sep">Noviembre 2026</div>
@@ -540,67 +552,67 @@
     <div class="detail-row fuji">
       <div class="d-num">1</div><div class="d-day">dom</div>
       <div><div class="d-city">Kawaguchiko</div><div class="d-night">🌙 noche 14 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Takayama→Kawaguchiko bus directo (~3h, Nohi Bus Alps-Fuji) <span class="pill p-move">reservar</span>. Lagos del Fuji, Momiji Corridor con koyo en su pico 🍂 <span class="pill p-spec">✅ RESERVADO — SORAPIA Villa Mt.FUJI Front</span></div>
+      <div class="d-note">Lagos del Fuji, Momiji Corridor con koyo en su pico 🍂 <span class="pill p-spec">✅ RESERVADO — SORAPIA Villa Mt.FUJI Front</span><div class="d-tr">🚗 Okuhida/Takayama → Kawaguchiko por Matsumoto y autopista Chuo (~4–4,5 h, confirmar con Google Maps; el bus directo se canceló). Salir temprano. Estacionamiento en SORAPIA a confirmar.</div></div>
     </div>
 
     <div class="detail-row hakone">
       <div class="d-num">2</div><div class="d-day">lun</div>
       <div><div class="d-city">Hakone ♨️</div><div class="d-night">🌙 noche 15 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Kawaguchiko→Hakone (bus 1.5h). Check-in ryokan con onsen y vistas al Fuji. Kaiseki dinner <span class="pill p-spec">✅ RESERVADO — 和一庵 (Waichian)</span></div>
+      <div class="d-note">Check-in ryokan con onsen y vistas al Fuji. Kaiseki dinner <span class="pill p-spec">✅ RESERVADO — 和一庵 (Waichian)</span><div class="d-tr">🚗 Kawaguchiko → Hakone (~1h30–2h). Estacionamiento del ryokan (Waichian) a confirmar.</div></div>
     </div>
 
     <div class="detail-row hakone">
       <div class="d-num">3</div><div class="d-day">mar</div>
       <div><div class="d-city">Hakone ♨️</div><div class="d-night">🌙 noche 16 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Open-Air Museum, lago Ashi, teleférico Owakudani. Tarde de onsen total en el ryokan</div>
+      <div class="d-note">Open-Air Museum, lago Ashi, teleférico Owakudani. Tarde de onsen total en el ryokan<div class="d-tr">🚗 Auto por Hakone (revisar estacionamientos en cada parada).</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">4</div><div class="d-day">mié</div>
       <div><div class="d-city">Tokyo</div><div class="d-night">🌙 noche 17 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Hakone→Tokyo (Romancecar 90min). Check-in y primera noche: Shinjuku — Golden Gai, Omoide Yokocho, Godzilla Head. <span class="pill p-spec">✅ RESERVADO — KOKO HOTEL Ginza-1chome (Chuo-ku, Ginza)</span></div>
+      <div class="d-note">Check-in y primera noche: Shinjuku — Golden Gai, Omoide Yokocho, Godzilla Head. <span class="pill p-spec">✅ RESERVADO — KOKO HOTEL Ginza-1chome (Chuo-ku, Ginza)</span><div class="d-tr">🚗 Hakone → Tokyo (~2 h). Devolver el auto antes de llegar a Ginza (estacionar en el hotel es caro); desde acá, metro/JR con IC card.</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">5</div><div class="d-day">jue</div>
       <div><div class="d-city">Tokyo — Harajuku/Shibuya</div><div class="d-night">🌙 noche 18 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Meiji Jingu, Takeshita St, Shibuya crossing, Yayoi Kusama Museum <span class="pill p-spec">reserva anticipada</span></div>
+      <div class="d-note">Meiji Jingu, Takeshita St, Shibuya crossing, Yayoi Kusama Museum <span class="pill p-res">✓ entradas compradas (Pepo y Cele)</span><div class="d-tr">🚇 Metro/JR con Suica/ICOCA.</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">6</div><div class="d-day">vie</div>
       <div><div class="d-city">Tokyo — Ginza/Minato</div><div class="d-night">🌙 noche 19 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Tokyo Tower + Zojo-ji, Ginza de día, Roppongi Hills. Noche: teamLab Borderless <span class="pill p-spec">reservar con meses de anticipación</span></div>
+      <div class="d-note">Tokyo Tower + Zojo-ji, Ginza de día, Roppongi Hills. Noche: teamLab Borderless <span class="pill p-res">✓ entradas compradas (Pepo y Cele)</span><div class="d-tr">🚇 Metro/JR con Suica/ICOCA.</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">7</div><div class="d-day">sáb</div>
       <div><div class="d-city">Tokyo — Asakusa/Ueno</div><div class="d-night">🌙 noche 20 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Senso-ji, Ueno Park + Tokyo National Museum, Sky Tree al atardecer <span class="pill p-spec">llegar 1h antes</span>, Akihabara <span class="pill p-exc">opt: Nikko día completo en lugar de este día</span></div>
+      <div class="d-note">Senso-ji, Ueno Park + Tokyo National Museum, Sky Tree al atardecer <span class="pill p-spec">llegar 1h antes</span>, Akihabara <span class="pill p-exc">opt: Nikko día completo en lugar de este día</span><div class="d-tr">🚇 Metro/JR con Suica/ICOCA.</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">8</div><div class="d-day">dom</div>
       <div><div class="d-city">Tokyo + Kamakura</div><div class="d-night">🌙 noche 21 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Excursión Kamakura (tren por la costa): Gran Buda, Enoshima, barrio surfer, momiji rojos <span class="pill p-exc">excursión</span></div>
+      <div class="d-note">Excursión Kamakura (tren por la costa): Gran Buda, Enoshima, barrio surfer, momiji rojos <span class="pill p-exc">excursión</span><div class="d-tr">🚆 JR Yokosuka Line Tokyo → Kamakura (~1 h) + Enoden a Enoshima.</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">9</div><div class="d-day">lun</div>
       <div><div class="d-city">Tokyo — día libre</div><div class="d-night">🌙 noche 22 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Imperial Palace, Shimokitazawa, Tsukiji exterior, compras finales. <span class="pill p-exc">opt: Nikko día completo — Tosho-gu, cascada Kegon, lago Chuzenji (2h tren cada sentido)</span></div>
+      <div class="d-note">Imperial Palace, Shimokitazawa, Tsukiji exterior, compras finales. <span class="pill p-exc">opt: Nikko día completo — Tosho-gu, cascada Kegon, lago Chuzenji (2h tren cada sentido)</span><div class="d-tr">🚇 Metro/JR. Si hacen Nikko: Tobu Limited Express Asakusa → Nikko (~2 h cada sentido).</div></div>
     </div>
 
     <div class="detail-row tokyo">
       <div class="d-num">10</div><div class="d-day">mar</div>
       <div><div class="d-city">Tokyo — último día</div><div class="d-night">🌙 noche 23 <span class="pill p-res">✓ reservado</span></div></div>
-      <div class="d-note">Compras de última hora, ramen de despedida, último matcha, izakaya de cierre</div>
+      <div class="d-note">Compras de última hora, ramen de despedida, último matcha, izakaya de cierre<div class="d-tr">🚇 Metro/JR con Suica/ICOCA.</div></div>
     </div>
 
     <div class="detail-row travel">
       <div class="d-num">11</div><div class="d-day">mié</div>
       <div><div class="d-city">✈ Vuelo Tokyo → BCN</div><div class="d-night">Noche en avión</div></div>
-      <div class="d-note">Día libre hasta tarde. HND 22:45 · Lufthansa · Llegan BCN 12 nov</div>
+      <div class="d-note">Día libre hasta tarde. HND 22:45 · Lufthansa · Llegan BCN 12 nov<div class="d-tr">🚇 Ginza → HND por Toei Asakusa Line (directo, ~35 min). Estar en el aeropuerto ~19:30 para el vuelo de las 22:45.</div></div>
     </div>
 
   </div>
@@ -655,7 +667,7 @@
   <p style="font-size:0.75rem;color:var(--muted);margin-top:14px;line-height:1.6;">
     💴 Llevar la mayor parte en <strong>yenes en efectivo</strong> — Takayama, Koyasan y zonas rurales no siempre aceptan tarjeta.<br>
     💳 Usar tarjeta <strong>WISE</strong> para retirar en cajeros <strong>7-Eleven</strong>, los más confiables para tarjetas extranjeras.<br>
-    🎟️ Reservar online antes de salir: <strong>teamLab Borderless</strong>, <strong>Yayoi Kusama Museum</strong> y <strong>NAKED Nijo</strong> (hasta el 22 oct, entradas anticipadas).
+    🎟️ Reservar online antes de salir: <strong>teamLab Borderless</strong>, <strong>Yayoi Kusama Museum</strong> y <strong>NAKED Nijo</strong>. Ya comprados: NAKED Nijo, tour gastronómico, ceremonia del té, teamLab y Museo Kusama; sumo (ver Entradas y reservas).
   </p>
 </section>
 
@@ -664,96 +676,96 @@
 </div>
 <!-- ════════════════ /TAB ITINERARIO ════════════════ -->
 
-<!-- ════════════════ TAB PLANNING ════════════════ -->
-<div id="tab-planning" class="tab-content">
+
+<!-- ════════════════ TAB ENTRADAS ════════════════ -->
+<div id="tab-entradas" class="tab-content">
 <section>
-  <h2>Detalle del planning por responsable</h2>
-  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:20px;line-height:1.6;">
-    Cada responsable busca, para su ciudad, un <strong>restaurante bueno</strong>, un <strong>free walking tour</strong> y <strong>lugares interesantes</strong> que no estén ya en el itinerario. Tildá cuando esté resuelto y dejá un comentario con el dato (nombre, link, horario). Los checks y comentarios se guardan en este navegador.
+  <h2>Entradas y reservas de actividades</h2>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">
+    Todo para 5 personas (Sofi incluida). Precios = total del grupo. Ordenado por fecha.
   </p>
 
-  <div class="plan-grid">
-
-    <!-- SANTI -->
-    <div class="person-card">
-      <div class="person-head">Santi</div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--osaka)"></span>Osaka (19–23 oct)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_osaka_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_osaka_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_osaka_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_osaka_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_osaka_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--alps)"></span>Takayama (30–31 oct)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_takayama_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_takayama_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_takayama_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_takayama_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_takayama_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
+  <div class="transport-card osaka">
+    <div class="transport-title">21 oct · 17:00 - Show de sumo en Osaka</div>
+    <ul class="transport-steps">
+      <li>Asiento estándar (Regular Show) con caja bento + 1 bebida incluida</li>
+      <li>5 adultos · €350,16 en total (~€70,03/persona)</li>
+    </ul>
+    <div class="paid-by">Sacó: Santi</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Pago confirmado</span>
+      <span class="transport-book">Cupón en la cuenta de la reserva</span>
     </div>
+  </div>
 
-    <!-- DELFI -->
-    <div class="person-card">
-      <div class="person-head">Delfi</div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--koyasan)"></span>Koyasan (23–24 oct)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_rest">Restaurante / shojin ryori</div><textarea class="task-comment" data-key="jp2026_task_koyasan_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_tour">Tour nocturno Okunoin</div><textarea class="task-comment" data-key="jp2026_task_koyasan_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_koyasan_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_koyasan_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_koyasan_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--kyoto)"></span>Kyoto (24–28 oct)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kyoto_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kyoto_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kyoto_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kyoto_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kyoto_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
+  <div class="transport-card osaka">
+    <div class="transport-title">22 oct · 18:30 - Tour gastronómico guiado por Osaka</div>
+    <ul class="transport-steps">
+      <li>12 platos + 2 bebidas (comida callejera y bar de sake)</li>
+      <li>5 personas · €293,43 en total (~€58,69/persona)</li>
+    </ul>
+    <div class="transport-note">*Nota: ese mismo día es la excursión a Nara; volver a Osaka a tiempo.</div>
+    <div class="paid-by">Sacó: Santi</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Reserva confirmada</span>
+      <span class="transport-book">Cupón en la cuenta de la reserva</span>
     </div>
+  </div>
 
-    <!-- SOFI -->
-    <div class="person-card">
-      <div class="person-head">Sofi</div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--alps)"></span>Kanazawa (28–30 oct)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kanazawa_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kanazawa_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kanazawa_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--fuji)"></span>Kawaguchiko (1 nov)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_kawaguchiko_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_kawaguchiko_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_kawaguchiko_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--hakone)"></span>Hakone (2–4 nov)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_hakone_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_hakone_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_hakone_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_hakone_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_hakone_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
+  <div class="transport-card kyoto">
+    <div class="transport-title">25 oct · 09:30–11:00 - Ceremonia del té en Gion (Orizuruya)</div>
+    <ul class="transport-steps">
+      <li>Sesión matutina · Gion-cho Minamigawa, Higashiyama, Kyoto</li>
+      <li>5 personas · ¥38.500 en total (¥7.700/persona, ~€41/persona)</li>
+      <li>Pagado por adelantado con tarjeta de crédito</li>
+    </ul>
+    <div class="transport-note">*Nota: no se pisa con el free walking tour de la mañana: elegir un horario posterior a las 11:00.</div>
+    <div class="paid-by">Sacó: Delfi</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Reservado y pagado</span>
+      <span class="transport-book">Cancelación desde la web de la reserva</span>
     </div>
+  </div>
 
-    <!-- PEPO Y CELE -->
-    <div class="person-card">
-      <div class="person-head">Pepo y Cele</div>
-
-      <div class="city-block">
-        <div class="city-block-title"><span class="city-dot" style="background:var(--tokyo)"></span>Tokyo (4–10 nov)</div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_rest"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_rest">Restaurante</div><textarea class="task-comment" data-key="jp2026_task_tokyo_rest_c" placeholder="Nombre, zona, link..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_tour"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_tour">Free walking tour</div><textarea class="task-comment" data-key="jp2026_task_tokyo_tour_c" placeholder="Nombre, horario, punto de encuentro..."></textarea></div></div>
-        <div class="task-item"><input type="checkbox" class="task-check" data-key="jp2026_task_tokyo_lug"><div class="task-item-body"><div class="task-item-label" id="label-jp2026_task_tokyo_lug">Lugares interesantes</div><textarea class="task-comment" data-key="jp2026_task_tokyo_lug_c" placeholder="2-3 lugares que sumar..."></textarea></div></div>
-      </div>
+  <div class="transport-card kyoto">
+    <div class="transport-title">25 oct · noche - NAKED meets Nijo-jo Castle</div>
+    <ul class="transport-steps">
+      <li>Entrada early bird (viernes, sábado, domingo y festivos)</li>
+      <li>5 adultos · €66,61 en total (~€13,32/persona)</li>
+    </ul>
+    <div class="paid-by">Sacó: Delfi</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Reserva confirmada</span>
+      <span class="transport-book">Cupón en la cuenta de la reserva</span>
     </div>
+  </div>
 
+  <div class="transport-card tokyo">
+    <div class="transport-title">Tokyo - teamLab</div>
+    <ul class="transport-steps">
+      <li>Fecha, horario y precio por cargar</li>
+    </ul>
+    <div class="paid-by">Sacó: Pepo y Cele</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Entradas compradas</span>
+      <span class="transport-book">Cupón / e-ticket de la compra</span>
+    </div>
+  </div>
+
+  <div class="transport-card tokyo">
+    <div class="transport-title">Tokyo - Museo Yayoi Kusama</div>
+    <ul class="transport-steps">
+      <li>Fecha, horario y precio por cargar</li>
+    </ul>
+    <div class="paid-by">Sacó: Pepo y Cele</div>
+    <div class="transport-footer">
+      <span class="urgency-badge urg-done">✅ Entradas compradas</span>
+      <span class="transport-book">Cupón / e-ticket de la compra</span>
+    </div>
   </div>
 </section>
 </div>
-<!-- ════════════════ /TAB PLANNING ════════════════ -->
+<!-- ════════════════ /TAB ENTRADAS ════════════════ -->
 
 <div id="tab-transporte" class="tab-content">
 <section>
@@ -770,7 +782,7 @@
   </div>
 
   <div class="transport-card osaka">
-    <div class="transport-title">18 oct - Llegada HND → Osaka <span class="pax-note">4 pax</span></div>
+    <div class="transport-title">19 oct - Llegada HND → Osaka <span class="pax-note">4 pax</span></div>
     <ul class="transport-steps">
       <li>Keikyu Line Haneda→Shinagawa (15 min)</li>
       <li>Shinkansen Shinagawa→Shin-Osaka (2h30)</li>
@@ -831,7 +843,7 @@
       <li>Un solo auto de alquiler para todo el tramo, en vez de trenes/buses sueltos</li>
       <li>Cubre Kanazawa→Takayama, Takayama→Kawaguchiko y Kawaguchiko→Hakone→Tokyo</li>
     </ul>
-    <div class="transport-note">*Nota: reemplaza el bus Nohi, el Hida Wide View via Nagoya y el Romancecar Hakone-Tokyo. Revisar estacionamiento en cada hotel/ryokan y devolucion del auto en Tokyo.</div>
+    <div class="transport-note">*Nota: reemplaza el bus Nohi, el Hida Wide View via Nagoya y el Romancecar Hakone-Tokyo. Revisar estacionamiento en cada hotel/ryokan. Devolver el auto en Tokyo el 4 nov antes de llegar a Ginza. Del 5 al 11 nov, solo metro/JR.</div>
     <div class="paid-by">Pagado por: Santi</div>
     <div class="transport-footer">
       <span class="urgency-badge urg-done">✅ Reservado</span>
@@ -840,7 +852,7 @@
   </div>
 
   <p style="font-size:0.75rem;color:var(--muted);margin-top:16px;line-height:1.6;">
-    <strong>A comprar en el momento:</strong> Osaka→Koyasan (23 oct, Limited Express Koya) y Koyasan→Kyoto (24 oct).
+    <strong>A comprar en el momento:</strong> Osaka→Nara (22 oct, Kintetsu), Osaka→Koyasan (23 oct, Limited Express Koya), Koyasan→Kyoto (24 oct) y Kanazawa→Fukui→Eiheiji (29 oct).
   </p>
 </section>
 </div>
@@ -964,6 +976,7 @@
 function showTab(name){
   document.querySelectorAll('.tab-content').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
+  if(!document.getElementById('tab-' + name)){ name = 'itinerario'; }
   document.getElementById('tab-' + name).classList.add('active');
   document.getElementById('btn-' + name).classList.add('active');
   try { localStorage.setItem('jp2026_active_tab', name); } catch(e) {}
@@ -973,31 +986,6 @@ document.addEventListener('DOMContentLoaded', function(){
   var saved = 'itinerario';
   try { saved = localStorage.getItem('jp2026_active_tab') || 'itinerario'; } catch(e) {}
   showTab(saved);
-
-  document.querySelectorAll('.task-check').forEach(function(cb){
-    var key = cb.getAttribute('data-key');
-    var label = document.getElementById('label-' + key);
-    var val = null;
-    try { val = localStorage.getItem(key); } catch(e) {}
-    if(val === '1'){
-      cb.checked = true;
-      if(label) label.classList.add('done');
-    }
-    cb.addEventListener('change', function(){
-      try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch(e) {}
-      if(label){ cb.checked ? label.classList.add('done') : label.classList.remove('done'); }
-    });
-  });
-
-  document.querySelectorAll('.task-comment').forEach(function(ta){
-    var key = ta.getAttribute('data-key');
-    var val = null;
-    try { val = localStorage.getItem(key); } catch(e) {}
-    if(val){ ta.value = val; }
-    ta.addEventListener('input', function(){
-      try { localStorage.setItem(key, ta.value); } catch(e) {}
-    });
-  });
 });
 </script>
 
